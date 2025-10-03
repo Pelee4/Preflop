@@ -1,0 +1,15 @@
+SUMMARY:
+	ROM0: 196 bytes used / 16188 free
+
+ROM0 bank #0:
+	SECTION: $0000-$003f ($0040 bytes) ["Tile Data"]
+	         $0000 = Mr_floor_sprite
+	EMPTY: $0040-$00ff ($00c0 bytes)
+	SECTION: $0100-$014f ($0050 bytes) ["Header"]
+	SECTION: $0150-$0183 ($0034 bytes) ["Entry point"]
+	         $0150 = memcpy
+	         $0157 = wait_vblank_start
+	         $015c = wait_vblank_start.do
+	         $0160 = main
+	EMPTY: $0184-$3fff ($3e7c bytes)
+	TOTAL EMPTY: $3f3c bytes
