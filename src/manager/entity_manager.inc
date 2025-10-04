@@ -1,5 +1,7 @@
 ;;Configuration of Entity Manager, I'm so good and amazing, like Spider-Man.
 
 
-def MAX_ENTITIES equ 20
-def COMPONENT_SIZE equ 4
+def MAX_ENTITIES        equ 20
+def COMPONENT_SIZE      equ 4
+def INVALID_COMPONENT   equ $FF
+def RESERVED_COMPONENT  equ $DE

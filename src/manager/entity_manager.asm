@@ -27,23 +27,52 @@ man_entity_init:: ;;Inicializarlo
     xor a  
     call memset_256
 
-    ret
+    ;; Invalidate all components (FF (at 15 min) in first item, Y-coordinate)
+    ld hl, sprite_components
+    ld de, COMPONENT_SIZE
+    ld b, MAX_ENTITIES
+    .loop:
+        ld [hl], INVALID_COMPONENT
+        add hl, de
+        dec b
+    jr nz, .loop
+
+    ret  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Allocate Space for one entity
 ;; Destroys: AF, B, HL
 ;;
+;; (EMOJIDERETROMAN) RETURNS
+;;  HL: Address of allocated component
+;;  
 man_entity_alloc:: ;;Inicializarlo
-    ;;Alive entities: 0
-    xor a
-    ld [alive_entitites], a 
+    lde hl, sprite_components
+    ld de, COMPONENT_SIZE
+    .loop
+        ld a, [hl]                   ;; A = Component_Sprite.Y
+        cp INVALID_COMPONENT         ;; Y += 1 (Only Zero on FF)
+        jr z, .found
+        ;; Not found
+        add hl, de
+    jr .loop
 
-    ;;MEMSET WOWERS OMGW, to write the same value in all
-    ld hl, sprite_components
-    ld b, sprite_components_size
-    xor a  
-    call memset_256
+    .found:
+    ;;HL = Component Address
+    ld [hl], RESERVED_COMPONENT
+    ld hl, alive_entitites
+    inc [hl]
 
     ret
 
-    
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Return the address of the sprite component array
+;;
+;; (EMOJIDERETROMAN) RETURNS
+;;  HL: Address of Sprite Component Start
+;;  B: Sprite components size
+;; 
+man_entity_get_sprite_components::
+    ld hl, sprite_components
+    ld b, sprite_components_size
+    ret

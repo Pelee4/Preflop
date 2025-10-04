@@ -18,7 +18,7 @@ ret
 ;; LCD ON (turns on the screen)
 ;;
 ;; DESTROYS AF, HL
-lcd_off::
+lcd_on::
     ;;BEWARE!!!!!!
     ld hl, rLCDC
     set rLCDC_LCD_ENABLE, [hl]
