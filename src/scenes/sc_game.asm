@@ -21,11 +21,13 @@ sc_game_init::
 
     ;; set background palette
     ;;
+    ;;TURNS OFF THE SCREEN
     call lcd_off
     ;; SET_BGP DEFAULT_PAL
     ;; SET_OBP1 DEFAULT_PAL
     ;; MEMCPY_256 sc_game_fence_tiles, VRAM_TILE_20, 2*VRAM_TILE_SIZE
 
+    ;; TURNS ON THE SCREEN
     call lcd_on
 
     ;; MOVE TO RAM

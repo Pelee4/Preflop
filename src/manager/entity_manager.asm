@@ -21,7 +21,7 @@ man_entity_init:: ;;Inicializarlo
     xor a
     ld [alive_entitites], a 
 
-    ;;MEMSET WOWERS OMGW, to write the same value in all
+    ;;MEMSET WOWERS OMGW to write the same v,alue in all
     ld hl, sprite_components
     ld b, sprite_components_size
     xor a  
@@ -40,7 +40,7 @@ man_entity_init:: ;;Inicializarlo
     ret  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Allocate Space for one entity
+;; Allocate Space for one entity m.a
 ;; Destroys: AF, B, HL
 ;;
 ;; (EMOJIDERETROMAN) RETURNS

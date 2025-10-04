@@ -11,7 +11,7 @@ sys_render_update::
     call man_entity_get_sprite_components
     ;; HL: sprite components
     ;; B: sprite_components_size
-    de de, OAM_START
+    ld de, OAM_START
     call memcpy_256
 
 
