@@ -9,7 +9,21 @@ SECTION "Utils", ROM0
 lcd_off::
     ;;BEWARE!!!!!!
     call wait_vblank_start
-    
+    ld hl, rLCDC
+    res rLCDC_LCD_ENABLE, 7
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; LCD ON (turns on the screen)
+;;
+;; DESTROYS AF, HL
+lcd_off::
+    ;;BEWARE!!!!!!
+    ld hl, rLCDC
+    set rLCDC_LCD_ENABLE, [hl]
+ret
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VBLANK
@@ -41,3 +55,18 @@ memcpy_256::
     jr nz, memcpy_256
     ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MEMSET_256
+;; INPUT;
+;;  HL: Destination Adress
+;;   B: Bytes to Set
+;;   A: Value to Write
+;;
+;; DESTROYS: AF, B, HL
+;;
+memset_256::
+    
+    ld [hl+], a
+    dec b
+    jr nz, memset_256
+ret
