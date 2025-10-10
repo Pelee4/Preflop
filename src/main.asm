@@ -26,6 +26,38 @@ game_init:
    ld hl, rOBJP
    ld [hl], %11100100
 
+   ;;Probando pruebas de fantasmas (como david) y rocas (como malphite)
+   MEMCPY Enemy_Sprite, $8200, $40
+   MEMCPY Rock_Sprite, $8260, $40
+
+   ld a, $20
+   ld hl, $990A
+   ld [hl], a
+   inc a
+   ld hl, $992A
+   ld [hl], a
+   inc a
+   ld hl, $990B
+   ld [hl], a
+   inc a
+   ld hl, $992B
+   ld [hl], a
+
+
+   ld a, $26
+   ld hl, $994A
+   ld [hl], a
+   inc a
+   ld hl, $996A
+   ld [hl], a
+   inc a
+   ld hl, $994B
+   ld [hl], a
+   inc a
+   ld hl, $996B
+   ld [hl], a
+
+
 
 
    ;;Encendemos Pantallita
