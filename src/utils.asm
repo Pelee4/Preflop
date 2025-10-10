@@ -10,7 +10,7 @@ lcd_off::
     ;;BEWARE!!!!!!
     call wait_vblank_start
     ld hl, rLCDC
-    res rLCDC_LCD_ENABLE, 7
+    res 7, [hl]
 ret
 
 
@@ -29,7 +29,7 @@ ret
 ;; VBLANK
 ;; DESTROYS AF, HL
 wait_vblank_start::
-    ld hl, rlY
+    ld hl, rLY
     ld a, VBLANK_START_LINE
     .loop:
         cp [hl]

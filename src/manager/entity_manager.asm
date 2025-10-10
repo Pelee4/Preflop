@@ -1,11 +1,11 @@
-INCLUDE "man/entity_manager.inc"
+INCLUDE "manager/entity_manager.inc"
 
 SECTION "Entity Manager Data", WRAM0[$C000] ;;to have all sprites in the same place
 
 components:
 
 sprite_components: DS (MAX_ENTITIES * COMPONENT_SIZE)
-sprite_components_end
+sprite_components_end:
 DEF sprite_components_size = sprite_components_end - sprite_components
 
 alive_entitites: DS 1 ;;to know hoy many entities are alive
@@ -47,7 +47,7 @@ man_entity_init:: ;;Inicializarlo
 ;;  HL: Address of allocated component
 ;;  
 man_entity_alloc:: ;;Inicializarlo
-    lde hl, sprite_components
+    ld hl, sprite_components
     ld de, COMPONENT_SIZE
     .loop
         ld a, [hl]                   ;; A = Component_Sprite.Y
