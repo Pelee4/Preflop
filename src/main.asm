@@ -5,6 +5,8 @@ include "macros.inc"
 ; Definición de estructura del jugador
 ; ============================================================
 
+DEF PLAYER_START_X EQU 16
+DEF PLAYER_START_Y EQU 16
 RSRESET
 DEF PLAYER_X        RB 1   ; posición X
 DEF PLAYER_Y        RB 1   ; posición Y
@@ -12,11 +14,14 @@ DEF PLAYER_ISMOVING RB 1   ; 0 = quieto, 1 = moviéndose
 DEF PLAYER_DIR      RB 1   ; 0=RIGHT, 1=LEFT, 2=UP, 3=DOWN
 DEF PLAYER_TIMER    RB 1   ; contador de frames
 DEF PLAYER_SIZE     RB 0   ; tamaño total (5 bytes)
-
+RSRESET
+DEF ENEMY_X         RB 1
+DEF ENEMY_Y         RB 1
+DEF ENEMY_SIZE      RB 0
 SECTION "Player Vars", WRAM0
 
 player_data: DS PLAYER_SIZE
-
+enemy_data: DS ENEMY_SIZE
 
 SECTION "Entry point", ROM0[$150]
 
@@ -25,6 +30,7 @@ main::
    call game_init
    loop:
       call read_input
+      call check_collision
       jr loop
    di
    halt
@@ -73,35 +79,35 @@ game_init:
 
    MEMCPY sprite1_player, $FE00, 4
    MEMCPY sprite2_player, $FE00 + 4, 4
+   MEMCPY sprite1_enemy, $FE00 + 8, 4
+   MEMCPY sprite2_enemy, $FE00 + 12, 4
 
+    ;; Posición inicial del enemigo
+   ld a, 80
+   ld [enemy_data + ENEMY_X], a
+   ld a, 40
+   ld [enemy_data + ENEMY_Y], a
+   
    ;; Meter rutina de copia con DMA en la HRAM
    ;; MEMCPY rutinaDMA, OAMDMA, rutinaDMA.fin - rutinaDMA
 
-   ;ld a, $20
-   ;ld hl, $990A
-   ;ld [hl], a
-   ;inc a
-   ;ld hl, $992A
-   ;ld [hl], a
-   ;inc a
-   ;ld hl, $990B
-   ;ld [hl], a
-   ;inc a
-   ;ld hl, $992B
-   ;ld [hl], a
 
-   ;ld a, $24
-   ;ld hl, $994A
-   ;ld [hl], a
-   ;inc a
-   ;ld hl, $996A
-   ;ld [hl], a
-   ;inc a
-   ;ld hl, $994B
-   ;ld [hl], a
-   ;inc a
-   ;ld hl, $996B
-   ;ld [hl], a
+
+
+
+   ;; GENERO UN BLOQUE DE PRUEBA
+   ld a, $24
+   ld hl, $994A
+   ld [hl], a
+   inc a
+   ld hl, $996A
+   ld [hl], a
+   inc a
+   ld hl, $994B
+   ld [hl], a
+   inc a
+   ld hl, $996B
+   ld [hl], a
 
 
 
@@ -281,6 +287,64 @@ update_player_sprite::
    add 8                  ; el segundo está a +8 px
    ld [$FE00 + 5], a      ; sprite 2 X
 ret
+
+check_collision::
+   ;; Carga posiciones del jugador y enemigo
+   ld a, [player_data + PLAYER_X]
+   ld b, a
+   ld a, [player_data + PLAYER_Y]
+   ld c, a
+
+   ld a, [enemy_data + ENEMY_X]
+   ld d, a
+   ld a, [enemy_data + ENEMY_Y]
+   ld e, a
+
+   ld a, b
+   sub d
+   bit 7, a          
+   jr z, check_y
+   cpl
+   inc a
+check_y:
+   cp 8
+   jr nc, no_collision
+
+   ld a, c
+   sub e
+   bit 7, a
+   jr z, collision_check
+   cpl
+   inc a
+collision_check:
+   cp 8
+   jr nc, no_collision
+
+   ;; Si hay colisión 
+   call reset_player_position
+   jr no_collision
+
+no_collision:
+   ret
+
+
+reset_player_position::
+   ;; Reposiciona al jugador en su punto del principio
+   ld a, PLAYER_START_X
+   ld [player_data + PLAYER_X], a
+   ld a, PLAYER_START_Y
+   ld [player_data + PLAYER_Y], a
+
+   ;; Actualiza OAM
+   call update_player_sprite
+
+   ;; reiniciamos su estado
+   xor a
+   ld [player_data + PLAYER_ISMOVING], a
+   ld [player_data + PLAYER_TIMER], a
+
+   ret
+
 
 
 
