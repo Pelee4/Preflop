@@ -1,5 +1,6 @@
 include "constants.inc"
 include "macros.inc"
+;;include "scenes/sc_game_data.asm"
 
 ; ============================================================
 ; Definición de estructura del jugador
@@ -44,10 +45,11 @@ game_init:
    MEMSET $9904, 0, 13
    MEMSET $9924, 0, 13
    
-   ;;Probando pruebas de fantasmas (como david) y rocas (como malphite)
+   ;;Probando pruebas de fantasmas (como pele) y rocas (como malphite)
    MEMCPY Enemy_Sprite, $8200, $40     ;20 21 22 23
    MEMCPY Rock_Sprite, $8240, $40      ;24 25 26 27
    MEMCPY Mr_floor_sprite, $8280, $40  ;28 29 30 31
+   MEMCPY Floor_sprite, $8300, $40  ;32 33 34 35
 
    ;;Paleteamos Paletas
    ld hl, rBGP
@@ -81,6 +83,9 @@ game_init:
    MEMCPY sprite2_player, $FE00 + 4, 4
    MEMCPY sprite1_enemy, $FE00 + 8, 4
    MEMCPY sprite2_enemy, $FE00 + 12, 4
+   MEMCPY sprite1_floor, $FE00 + 16, 4
+   MEMCPY sprite2_floor, $FE00 + 20, 4
+
 
     ;; Posición inicial del enemigo
    ld a, 80
@@ -321,14 +326,14 @@ collision_check:
    jr nc, no_collision
 
    ;; Si hay colisión 
-   call reset_player_position
+   call on_player_death
    jr no_collision
 
 no_collision:
    ret
 
 
-reset_player_position::
+on_player_death::
    ;; Reposiciona al jugador en su punto del principio
    ld a, PLAYER_START_X
    ld [player_data + PLAYER_X], a

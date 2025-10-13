@@ -1,5 +1,8 @@
 SECTION "Sprites DEF", ROM0
 
+;;include "Tiles/Floor.inc"
+;;include "Tiles/Floor.z80"
+
 
 Mr_floor_sprite:
 DB $00, $00, $0F, $0F, $10, $1F, $10, $1F, $10, $10, $10, $10, $14, $19, $14, $10
@@ -20,6 +23,17 @@ DB $00, $00, $E0, $E0, $F0, $10, $F8, $08, $F8, $28, $F8, $28, $F8, $88, $FC, $C
 DB $FA, $C6, $FA, $06, $EA, $16, $E2, $1E, $CA, $3E, $0C, $FC, $E8, $F8, $30, $30
 
 
+Floor_sprite:
+DB $00,$FF,$5D,$FF,$77,$FF,$7F,$FF
+DB $47,$FF,$5F,$E7,$57,$E7,$54,$E7
+DB $55,$E6,$55,$E6,$55,$E6,$55,$E6
+DB $55,$E6,$55,$E6,$5D,$E6,$44,$FF
+DB $00,$FF,$57,$FF,$FF,$FF,$F7,$FF
+DB $EF,$FF,$FF,$FF,$FF,$FF,$7F,$FF
+DB $FF,$7F,$7F,$7F,$47,$7F,$5F,$67
+DB $57,$67,$57,$67,$DF,$67,$47,$FF
+
+
 SECTION "Data", ROM0
 
 ;;             		y  x  tile  Att         
@@ -27,3 +41,5 @@ sprite1_player:  DB 16, 16, $28, %00000000
 sprite2_player:  DB 16, 24, $2A, %00000000
 sprite1_enemy:  DB  40,  80,   $20,  %00000000   
 sprite2_enemy:  DB  40,  88,   $22,  %00000000   
+sprite1_floor: DB 100, 50, $30, %00000000
+sprite2_floor: DB 100, 58, $32, %00000000

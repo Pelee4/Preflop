@@ -1,3 +1,4 @@
-SECTION "Scene Game Data", ROM0
+;; EXAMPLE LEVEL. HERE GOES THE DATA INFO, LIKE TILES AND SO ON
 
-;;here goes the data info, like tiles and so on
+SECTION "game_data", ROM0
+
