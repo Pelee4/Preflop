@@ -185,13 +185,6 @@ start_move::
    ld [player_data + PLAYER_ISMOVING], a
    xor a
    ld [player_data + PLAYER_TIMER], a
-ret
-
-update_move::
-
-   ld a, [player_data + PLAYER_TIMER]
-   cp 15
-   jr z, finish_move
 
    ld a, [player_data + PLAYER_DIR]
    cp 0                   ; RIGHT
@@ -207,90 +200,61 @@ update_move::
 
    move_right:
       ld a, [player_data + PLAYER_X]
-      inc a
+      add 16
       ld [player_data + PLAYER_X], a
+      call update_sprite
    jr skip
 
    move_left:
       ld a, [player_data + PLAYER_X]
-      dec a
+      sub 16
       ld [player_data + PLAYER_X], a
+      call update_sprite
    jr skip
 
    move_up:
       ld a, [player_data + PLAYER_Y]
-      dec a
+      sub 16
       ld [player_data + PLAYER_Y], a
+      call update_sprite
    jr skip
 
    move_down:
       ld a, [player_data + PLAYER_Y]
-      inc a
+      add 16
       ld [player_data + PLAYER_Y], a
+      call update_sprite
    jr skip
 
    skip:
-      ld a, [player_data + PLAYER_TIMER]
-      inc a
-      ld [player_data + PLAYER_TIMER], a
-
-      call update_player_sprite
+      call update_move
    ret
 
-   finish_move:
-      ld a, [player_data + PLAYER_DIR]
-      cp 0
-      jr z, snap_right
-      cp 1
-      jr z, snap_left
-      cp 2
-      jr z, snap_up
-      cp 3
-      jr z, snap_down
-   jr done
+update_move::
+   call wait_vblank_start
+   ld a, [player_data + PLAYER_TIMER]
+   inc a
+   ld [player_data + PLAYER_TIMER], a
+   cp 30                      ; esperar 16 frames de cooldown
+   jr c, skip_end
 
-   snap_right:
-      ld a, [player_data + PLAYER_X]
-      and %11110000
-      add 16
-      ld [player_data + PLAYER_X], a
-   jr done
+   xor a
+   ld [player_data + PLAYER_ISMOVING], a   ; termina cooldown
+   ld [player_data + PLAYER_TIMER], a
 
-   snap_left:
-      ld a, [player_data + PLAYER_X]
-      and %11110000
-      ld [player_data + PLAYER_X], a
-   jr done
-
-   snap_up:
-      ld a, [player_data + PLAYER_Y]
-      and %11110000
-      ld [player_data + PLAYER_Y], a
-   jr done
-
-   snap_down:
-      ld a, [player_data + PLAYER_Y]
-      and %11110000
-      add 16
-      ld [player_data + PLAYER_Y], a
-   jr done
-
-   done:
-      xor a
-      ld [player_data + PLAYER_ISMOVING], a
-      call update_player_sprite
+skip_end:
    ret
 
-update_player_sprite::
+update_sprite::
    call wait_vblank_start
    ld a, [player_data + PLAYER_Y]
-   ld [$FE00], a          ; sprite 1 Y
-   ld [$FE00 + 4], a      ; sprite 2 Y
-
+   ld [$FE00], a
+   ld [$FE00 + 4], a
+   
    ld a, [player_data + PLAYER_X]
-   ld [$FE00 + 1], a      ; sprite 1 X
-   add 8                  ; el segundo está a +8 px
-   ld [$FE00 + 5], a      ; sprite 2 X
+   ld [$FE00 + 1], a
+   add 8
+   ld [$FE00 + 5], a
 ret
 
 check_collision::
@@ -341,7 +305,7 @@ on_player_death::
    ld [player_data + PLAYER_Y], a
 
    ;; Actualiza OAM
-   call update_player_sprite
+   call update_sprite
 
    ;; reiniciamos su estado
    xor a
