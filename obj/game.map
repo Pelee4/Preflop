@@ -1,0 +1,85 @@
+SUMMARY:
+	ROM0: 1283 bytes used / 15101 free
+	WRAM0: 88 bytes used / 4008 free
+
+ROM0 bank #0:
+	SECTION: $0000 ($0000 bytes) ["game_data"]
+	SECTION: $0000-$0036 ($0037 bytes) ["Entity Manager Code"]
+	         $0000 = man_entity_init
+	         $0015 = man_entity_init.loop
+	         $001c = man_entity_alloc
+	         $0022 = man_entity_alloc.loop
+	         $002a = man_entity_alloc.found
+	         $0031 = man_entity_get_sprite_components
+	SECTION: $0037-$005c ($0026 bytes) ["Menu scene"]
+	         $0037 = sc_game_start
+	         $003a = sc_game_start.loop
+	         $0042 = sc_game_start_init
+	         $0049 = read_a
+	SECTION: $005d-$0082 ($0026 bytes) ["Utils"]
+	         $005d = lcd_off
+	         $0068 = lcd_on
+	         $006e = wait_vblank_start
+	         $0073 = wait_vblank_start.loop
+	         $0077 = memcpy_256
+	         $007e = memset_256
+	SECTION: $0083-$009a ($0018 bytes) ["Data"]
+	         $0083 = sprite1_player
+	         $0087 = sprite2_player
+	         $008b = sprite1_enemy
+	         $008f = sprite2_enemy
+	         $0093 = sprite1_floor
+	         $0097 = sprite2_floor
+	SECTION: $009b-$00a7 ($000d bytes) ["Render System Code"]
+	         $009b = sys_render_update
+	EMPTY: $00a8-$00ff ($0058 bytes)
+	SECTION: $0100-$014f ($0050 bytes) ["Header"]
+	SECTION: $0150-$0157 ($0008 bytes) ["Entry point"]
+	         $0150 = main
+	SECTION: $0158-$035a ($0203 bytes) ["Lvl1 scene"]
+	         $0158 = sc_game_lvl1
+	         $015b = loop
+	         $0164 = sc_game_lvl1_init
+	         $0240 = read_input
+	         $026c = start_move_right
+	         $0275 = start_move_left
+	         $027e = start_move_up
+	         $0287 = start_move_down
+	         $0290 = moving
+	         $0294 = start_move
+	         $02b2 = move_right
+	         $02bf = move_left
+	         $02cc = move_up
+	         $02d9 = move_down
+	         $02e6 = skip
+	         $02ea = update_move
+	         $02ff = skip_end
+	         $0300 = update_sprite
+	         $0318 = check_collision
+	         $0330 = check_y
+	         $033c = collision_check
+	         $0345 = no_collision
+	         $0346 = on_player_death
+	SECTION: $035b-$055a ($0200 bytes) ["Sprites DEF"]
+	         $035b = Mr_floor_sprite
+	         $039b = Rock_Sprite
+	         $03db = Enemy_Sprite
+	         $041b = Stairs_sprite
+	         $045b = Floor_sprite
+	         $049b = Wall_sprite
+	         $04db = AnotherFloor_sprite
+	         $051b = AnotherDifferentFloor_sprite
+	EMPTY: $055b-$3fff ($3aa5 bytes)
+	TOTAL EMPTY: $3afd bytes
+
+WRAM0 bank #0:
+	SECTION: $c000-$c050 ($0051 bytes) ["Entity Manager Data"]
+	         $c000 = sprite_components
+	         $c000 = components
+	         $c050 = sprite_components_end
+	         $c050 = alive_entitites
+	SECTION: $c051-$c057 ($0007 bytes) ["Player Vars"]
+	         $c051 = player_data
+	         $c056 = enemy_data
+	EMPTY: $c058-$cfff ($0fa8 bytes)
+	TOTAL EMPTY: $0fa8 bytes
