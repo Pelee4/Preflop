@@ -8,9 +8,11 @@ SECTION "Utils", ROM0
 ;; DESTROYS AF, HL
 lcd_off::
     ;;BEWARE!!!!!!
+    di
     call wait_vblank_start
     ld hl, rLCDC
     res 7, [hl]
+    ei
 ret
 
 

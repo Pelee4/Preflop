@@ -27,7 +27,12 @@ enemy_data: DS ENEMY_SIZE
 SECTION "Entry point", ROM0[$150]
 
 main::
-   
+   call sc_game_start
+   ;call sc_game_lvl1_init
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Este main solo tiene que tener llamadas a los init de las escenas, niveles y menús.
+;; Todo lo que hay ahora aqui seria para un lvl por ejemplo.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    call game_init
    loop:
       call read_input
