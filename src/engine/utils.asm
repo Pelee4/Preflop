@@ -57,6 +57,18 @@ memcpy_256::
     jr nz, memcpy_256
     ret
 
+
+memcpy::
+    ld a, [hl+]
+    ld [de], a
+    inc de
+    dec bc
+    ld a, b
+    or c
+    jr nz, memcpy
+ret
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MEMSET_256
 ;; INPUT;

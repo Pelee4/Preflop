@@ -13,3 +13,11 @@ MACRO MEMCPY
    ld b, \3
    call memcpy_256
 ENDM
+
+
+MACRO MEMCPY_2
+   ld hl, \1
+   ld de, \2
+   ld bc, \3
+   call memcpy
+ENDM

@@ -37,8 +37,8 @@ sc_game_lvl1::
 sc_game_lvl1_init::
     ;;Apagamos Pantallita con el wait_vblank and other stuff
    call lcd_off
-   MEMSET $9800, 0, 576
-   MEMCPY $9800, map1, 576
+   call Tiles_Init
+   MEMCPY_2 map1, $9800, 576
 
    
    

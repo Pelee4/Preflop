@@ -30,8 +30,10 @@ SECTION "Initialize tiles", ROM0
 ; ###############################################################################
 ;; TILESET_ENVIROMENT INTIZIALIZATION
 ; ###############################################################################
- MEMCPY TileEnvironment, VRAM_TILE_START + $10, 432 ;27 tiles (8x8) = 7 tiles 16x16
 
+Tiles_Init::
+	MEMCPY_2 TileEnvironment, VRAM_TILE_START + $10, 27*16 ;27 tiles (8x8) = 7 tiles 16x16
+ret
 
 
 
