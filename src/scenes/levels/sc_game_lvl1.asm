@@ -1,7 +1,11 @@
 ;;LVL1
 
-include "constants.inc"
-include "macros.inc"
+include "includes/constants.inc"
+include "includes/macros.inc"
+; include "data/Maps/lvl1_tilemap_wospliting.inc"
+; include "data/Maps/lvl1_tilemap_wospliting.z80"
+; include "data/Maps/lvl1_tilemap.z80"
+
 
 DEF PLAYER_START_X EQU 16
 DEF PLAYER_START_Y EQU 16
@@ -43,7 +47,7 @@ sc_game_lvl1_init::
    MEMCPY Rock_Sprite, $8240, $40      ;24 25 26 27
    MEMCPY Mr_floor_sprite, $8280, $40  ;28 29 30 31
    MEMCPY Floor_sprite, $8300, $40  ;32 33 34 35
-
+   ;; MEMCPY Map1, $9800, $89
    ;;Paleteamos Paletas
    ld hl, rBGP
    ld [hl], %11100100
@@ -222,7 +226,7 @@ update_move::
    ld a, [player_data + PLAYER_TIMER]
    inc a
    ld [player_data + PLAYER_TIMER], a
-   cp 30                      ; esperar 16 frames de cooldown
+   cp 15                      ; esperar 16 frames de cooldown
    jr c, skip_end
 
    xor a

@@ -1,6 +1,6 @@
 ;; EXAMPLE FILE. IT MAKES A LEVEL BASICALLY
 ;; AQUI DEBERIAMOS PONER NUESTRO MAIN ACTUAL PERO NO TENGO COJONES A CAMBIARLO
-include "constants.inc"
+include "includes/constants.inc"
 
 SECTION "Menu scene", ROM0
 

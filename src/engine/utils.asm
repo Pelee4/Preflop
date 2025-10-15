@@ -1,4 +1,4 @@
-INCLUDE "constants.inc"
+INCLUDE "includes/constants.inc"
 
 SECTION "Utils", ROM0 
 
