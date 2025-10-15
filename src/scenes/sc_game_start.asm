@@ -17,7 +17,7 @@ ret
 sc_game_start_init::
 
     call lcd_off
-
+    ;MEMSET $9800, 0, 576
     ;;Copiamos los tiles
     MEMSET $9904, 0, 13
     MEMSET $9924, 0, 13
