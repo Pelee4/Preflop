@@ -6,7 +6,7 @@
 ;   Section       : pruebilla
 ;   Bank          : 0
 ;   Map size      : 20 x 18
-;   Tile set      : Z:\home\cpc\gbtelera\tools\gbdesigners\GBTD\floor.gbr
+;   Tile set      : C:\users\cpc\Desktop\Preflop\src\data\archivos\tilesets_preflop\8x8_Tileset1.gbr
 ;   Plane count   : 1 plane (8 bits)
 ;   Plane order   : Tiles are continues
 ;   Tile offset   : 0
