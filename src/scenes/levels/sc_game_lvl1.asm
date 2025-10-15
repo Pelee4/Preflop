@@ -37,10 +37,9 @@ sc_game_lvl1::
 sc_game_lvl1_init::
     ;;Apagamos Pantallita con el wait_vblank and other stuff
    call lcd_off
+   MEMSET $9800, 0, 576
 
-   ;;Quitamos logo Nintendo
-   MEMSET $9904, 0, 13
-   MEMSET $9924, 0, 13
+   
    
    ;;Probando pruebas de fantasmas (como pele) y rocas (como malphite)
    MEMCPY Enemy_Sprite, $8200, $40     ;20 21 22 23
