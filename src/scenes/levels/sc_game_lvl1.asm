@@ -47,6 +47,7 @@ sc_game_lvl1_init::
    MEMCPY Rock_Sprite, $8240, $40      ;24 25 26 27
    MEMCPY Mr_floor_sprite, $8280, $40  ;28 29 30 31
    MEMCPY Floor_sprite, $8300, $40  ;32 33 34 35
+   memcpy Void_sprite, $8
    ;; MEMCPY Map1, $9800, $89
    ;;Paleteamos Paletas
    ld hl, rBGP
