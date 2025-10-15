@@ -38,6 +38,7 @@ sc_game_lvl1_init::
     ;;Apagamos Pantallita con el wait_vblank and other stuff
    call lcd_off
    MEMSET $9800, 0, 576
+   MEMCPY $9800, map1, 576
 
    
    
@@ -45,9 +46,8 @@ sc_game_lvl1_init::
    MEMCPY Enemy_Sprite, $8200, $40     ;20 21 22 23
    MEMCPY Rock_Sprite, $8240, $40      ;24 25 26 27
    MEMCPY Mr_floor_sprite, $8280, $40  ;28 29 30 31
-   MEMCPY Floor_sprite, $8300, $40  ;32 33 34 35
-   memcpy Void_sprite, $8
-   ;; MEMCPY Map1, $9800, $89
+
+
    ;;Paleteamos Paletas
    ld hl, rBGP
    ld [hl], %11100100
