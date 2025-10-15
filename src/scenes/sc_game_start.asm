@@ -1,6 +1,7 @@
 ;; EXAMPLE FILE. IT MAKES A LEVEL BASICALLY
 ;; AQUI DEBERIAMOS PONER NUESTRO MAIN ACTUAL PERO NO TENGO COJONES A CAMBIARLO
 include "includes/constants.inc"
+include "includes/macros.inc"
 
 SECTION "Menu scene", ROM0
 
@@ -17,7 +18,13 @@ sc_game_start_init::
 
     call lcd_off
 
-    ;;Dibujar logo y Press A to play
+    ;;Copiamos los tiles
+    MEMSET $9904, 0, 13
+    MEMSET $9924, 0, 13
+    MEMCPY PreflopLogoTiles, $8000, 144
+
+    ;;copiamos a la pantalla
+    MEMCPY PreflopLogoMap, $9800, 360
 
     call lcd_on
 
