@@ -34,3 +34,20 @@ read_input::
 
 ret
 
+read_input_buttons::
+   ld a, [player_data + PLAYER_ISMOVING]
+   cp 0
+   ret nz
+
+   ld a, SELECT_BUTTONS
+   ld [rJOYP], a
+   ld a, [rJOYP]
+   ld a, [rJOYP]
+   ld a, [rJOYP]
+
+   bit A_PRESSED, a
+   ret nz
+
+   call Interact
+
+ret

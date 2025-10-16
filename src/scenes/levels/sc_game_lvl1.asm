@@ -14,6 +14,8 @@ sc_game_lvl1::
     call sc_game_lvl1_init
     loop:
         call read_input
+        call read_input_buttons
+        call check_coll_empty_tile
         call check_collision
         jr loop
     ret
@@ -54,9 +56,9 @@ sc_game_lvl1_init::
    MEMSET $FE00, 0, 160
 
    ;;INITIALIZE PLAYER_DATA ON 0
-   ld a, 16
+   ld a, 80
    ld [player_data + PLAYER_Y], a
-   ld a, 16
+   ld a, 48
    ld [player_data + PLAYER_X], a
    ld a, 0
    ld [player_data + PLAYER_ISMOVING], a
@@ -65,7 +67,7 @@ sc_game_lvl1_init::
    ld a, 0
    ld [player_data + PLAYER_TIMER], a
    ld a, 0
-   ld [player_data + PLAYER_INTERACTION_BOOL], a
+   ld [player_data + PLAYER_INT_BOOL], a
 
 
    ; WRITES SPRITES ON SCREEN

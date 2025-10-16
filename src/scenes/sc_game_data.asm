@@ -44,8 +44,8 @@ ret
 SECTION "Sprites definition", ROM0
 
 ;;             		y  x  tile  Att         
-sprite1_player:  DB 16, 16, $28, %00000000
-sprite2_player:  DB 16, 24, $2A, %00000000
+sprite1_player:  DB 80, 48, $28, %00000000
+sprite2_player:  DB 80, 56, $2A, %00000000
 sprite1_enemy:  DB  40,  80,   $20,  %00000000   
 sprite2_enemy:  DB  40,  88,   $22,  %00000000   
 sprite1_floor: DB 100, 50, $30, %00000000
