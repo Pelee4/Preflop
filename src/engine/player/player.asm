@@ -115,7 +115,7 @@ update_move::
    ld a, [player_data + PLAYER_TIMER]
    inc a
    ld [player_data + PLAYER_TIMER], a
-   cp 10                    ; esperar 16 frames de cooldown
+   cp 5                    ; esperar X frames de cooldown
    jr c, skip_end
 
    xor a
