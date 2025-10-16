@@ -2,28 +2,11 @@
 
 include "includes/constants.inc"
 include "includes/macros.inc"
-; include "data/Maps/lvl1_tilemap_wospliting.inc"
-; include "data/Maps/lvl1_tilemap_wospliting.z80"
-; include "data/Maps/lvl1_tilemap.z80"
+include "engine/player/player_data.inc"
+include "src/engine/enemies/enemy1_data.inc"
 
 
-DEF PLAYER_START_X EQU 16
-DEF PLAYER_START_Y EQU 16
-RSRESET
-DEF PLAYER_X        RB 1   ; posición X
-DEF PLAYER_Y        RB 1   ; posición Y
-DEF PLAYER_ISMOVING RB 1   ; 0 = quieto, 1 = moviéndose
-DEF PLAYER_DIR      RB 1   ; 0=RIGHT, 1=LEFT, 2=UP, 3=DOWN
-DEF PLAYER_TIMER    RB 1   ; contador de frames
-DEF PLAYER_SIZE     RB 0   ; tamaño total (5 bytes)
-RSRESET
-DEF ENEMY_X         RB 1
-DEF ENEMY_Y         RB 1
-DEF ENEMY_SIZE      RB 0
-SECTION "Player Vars", WRAM0
 
-player_data: DS PLAYER_SIZE
-enemy_data: DS ENEMY_SIZE
 
 SECTION "Lvl1 scene", ROM0
 
@@ -35,20 +18,23 @@ sc_game_lvl1::
         jr loop
     ret
 sc_game_lvl1_init::
-    ;;Apagamos Pantallita con el wait_vblank and other stuff
+   ;===========================
+   ;; SCREEN OFF
+   ;===========================
+
    call lcd_off
    call Tiles_Init
    MEMCPY_2 map1, $9800, 576
 
    
-   
-   ;;Probando pruebas de fantasmas (como pele) y rocas (como malphite)
+
+   ;ejemplo
    MEMCPY Enemy_Sprite, $8200, $40     ;20 21 22 23
-   MEMCPY Rock_Sprite, $8240, $40      ;24 25 26 27
    MEMCPY Mr_floor_sprite, $8280, $40  ;28 29 30 31
 
 
-   ;;Paleteamos Paletas
+
+   ;;PALETAS
    ld hl, rBGP
    ld [hl], %11100100
 
@@ -75,13 +61,15 @@ sc_game_lvl1_init::
    ld [player_data + PLAYER_DIR], a
    ld a, 0
    ld [player_data + PLAYER_TIMER], a
+   ld a, 0
+   ld [player_data + PLAYER_INTERACTION_BOOL], a
 
    MEMCPY sprite1_player, $FE00, 4
    MEMCPY sprite2_player, $FE00 + 4, 4
    MEMCPY sprite1_enemy, $FE00 + 8, 4
    MEMCPY sprite2_enemy, $FE00 + 12, 4
-   MEMCPY sprite1_floor, $FE00 + 16, 4
-   MEMCPY sprite2_floor, $FE00 + 20, 4
+   ;MEMCPY sprite1_floor, $FE00 + 16, 4
+   ;MEMCPY sprite2_floor, $FE00 + 20, 4
 
 
     ;; Posición inicial del enemigo
@@ -110,7 +98,10 @@ sc_game_lvl1_init::
 
 
 
-   ;;Encendemos Pantallita
+   ;===========================
+   ; SCREEN ON
+   ;===========================
+
    call lcd_on
 ret
 

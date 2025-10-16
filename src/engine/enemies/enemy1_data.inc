@@ -1,0 +1,4 @@
+RSRESET
+DEF ENEMY_X         RB 1
+DEF ENEMY_Y         RB 1
+DEF ENEMY_SIZE      RB 0
