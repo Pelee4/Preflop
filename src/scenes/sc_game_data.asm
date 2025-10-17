@@ -66,3 +66,13 @@ sprite1_player_l2:  DB 64, 56, $28, %00000000
 sprite2_player_l2:  DB 64, 64, $2A, %00000000
 
 
+; #############################################################
+; VARIABLES DEL EFECTO DE ONDA HORIZONTAL (X SINE)
+; #############################################################
+SECTION "GameStart Vars", WRAM0
+
+wSinePhase:: ds 1    
+wSineFrameCounter:: ds 1
+wSineActive:: ds 1
+wSineAmplitude:: ds 1
+wSineCycleCount:: ds 1
