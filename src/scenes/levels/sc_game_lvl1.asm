@@ -18,6 +18,7 @@ sc_game_lvl1::
         call check_collision
         jr loop_lvl1
     ret
+
 sc_game_lvl1_init::
    ;===========================
    ;; SCREEN OFF
@@ -67,11 +68,11 @@ sc_game_lvl1_init::
 
    ; WRITES SPRITES ON SCREEN
    ; - PLAYER
-   MEMCPY sprite1_player, $FE00, 4
-   MEMCPY sprite2_player, $FE00 + 4, 4
+   MEMCPY sprite1_player_l1, $FE00, 4
+   MEMCPY sprite2_player_l1, $FE00 + 4, 4
    ; - ENEMIES
-   MEMCPY sprite1_enemy, $FE00 + 8, 4
-   MEMCPY sprite2_enemy, $FE00 + 12, 4
+   MEMCPY sprite1_enemy_l1, $FE00 + 8, 4
+   MEMCPY sprite2_enemy_l1, $FE00 + 12, 4
  
 
 
@@ -86,12 +87,6 @@ sc_game_lvl1_init::
     ;MAP DRAW
     MEMCPY_2 map1, $9800, 576
 
-
-    ; PLAYER INITIAL POSITION
-    ld a, 48
-    ld [player_data + PLAYER_X], a
-    ld a, 80
-    ld [player_data + PLAYER_Y], a
 
     ; ENEMIES INITIAL POSITION
     ld a, 80

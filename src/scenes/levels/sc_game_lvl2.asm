@@ -28,7 +28,7 @@ sc_game_lvl2_init::
 
    
    ;MAP DRAW
-   MEMCPY_2 map1, $9800, 576
+   MEMCPY_2 map2, $9800, 576
 
    
 
@@ -55,11 +55,11 @@ sc_game_lvl2_init::
    MEMSET $FE00, 0, 160
 
    ;;INITIALIZE PLAYER_DATA ON 0
-   ld a, 80
+   ld a, 64
    ld [player_data + PLAYER_Y], a
 ;    ld a, 80
 ;    ld [player_data + PLAYER_PREVIOUS_Y], a
-   ld a, 48
+   ld a, 56
    ld [player_data + PLAYER_X], a
 ;    ld a, 48
 ;    ld [player_data + PLAYER_PREVIOUS_X], a
@@ -75,19 +75,16 @@ sc_game_lvl2_init::
 
    ; WRITES SPRITES ON SCREEN
    ; - PLAYER
-   MEMCPY sprite1_player, $FE00, 4
-   MEMCPY sprite2_player, $FE00 + 4, 4
-   ; - ENEMIES
-   MEMCPY sprite1_enemy, $FE00 + 8, 4
-   MEMCPY sprite2_enemy, $FE00 + 12, 4
+   MEMCPY sprite1_player_l2, $FE00, 4
+   MEMCPY sprite2_player_l2, $FE00 + 4, 4
  
 
 
     ;; ENEMIES INITIAL POSITION
-   ld a, 80
-   ld [enemy_data + ENEMY_X], a
-   ld a, 40
-   ld [enemy_data + ENEMY_Y], a
+   ;ld a, 80
+   ;ld [enemy_data + ENEMY_X], a
+   ;ld a, 40
+   ;ld [enemy_data + ENEMY_Y], a
    
 
 

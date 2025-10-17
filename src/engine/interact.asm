@@ -86,6 +86,26 @@ left_tile:
 ret
 
 up_tile:
+    ld a, l
+    sbc e
+    ld l, a
+    ld a, [hl]
+    cp $18
+    jr z, check_empty_up
+    cp $14
+    ret nz
+        ld a, [player_data + PLAYER_INT_BOOL]
+        cp 0
+        ret nz
+        call put_empty
+    ret
+
+    
+    check_empty_up:
+        ld a, [player_data + PLAYER_INT_BOOL]
+        cp 1
+        ret nz
+        call put_floor
 
 ret
 
