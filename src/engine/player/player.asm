@@ -79,6 +79,8 @@ start_move::
    jr skip
 
    move_right:
+      ; ld a, [player_data + PLAYER_X]
+      ; ld [player_data + PLAYER_PREVIOUS_X], a  ;saves x pos in previous x
       ld a, [player_data + PLAYER_X]
       add 16
       ld [player_data + PLAYER_X], a
@@ -86,6 +88,8 @@ start_move::
    jr skip
 
    move_left:
+      ; ld a, [player_data + PLAYER_X]
+      ; ld [player_data + PLAYER_PREVIOUS_X], a 
       ld a, [player_data + PLAYER_X]
       sub 16
       ld [player_data + PLAYER_X], a
@@ -93,6 +97,8 @@ start_move::
    jr skip
 
    move_up:
+      ; ld a, [player_data + PLAYER_Y]
+      ; ld [player_data + PLAYER_PREVIOUS_Y], a 
       ld a, [player_data + PLAYER_Y]
       sub 16
       ld [player_data + PLAYER_Y], a
@@ -100,6 +106,8 @@ start_move::
    jr skip
 
    move_down:
+      ; ld a, [player_data + PLAYER_Y]
+      ; ld [player_data + PLAYER_PREVIOUS_Y], a 
       ld a, [player_data + PLAYER_Y]
       add 16
       ld [player_data + PLAYER_Y], a

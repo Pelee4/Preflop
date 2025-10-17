@@ -4,3 +4,33 @@
 ; - QUE ALMACENE UNA ESCENA DE UNA PARRTIDA GUARDADA Y LA CARGUE AL REANUDAR PARTIDA
 ; - ...
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+include "includes/constants.inc"
+include "includes/macros.inc"
+include "src/engine/player/player_data.inc"
+
+
+
+
+
+SECTION "Level_manager_stuff", ROM0
+
+get_player_level:
+    ld a, [player_data + PLAYER_LEVEL]
+ret
+
+
+change_level_manager::
+    call get_player_level
+    cp 2
+    jr z, open_lvl2
+;   cp 3
+;   jr z, call sc_game_lvl3   
+
+ret
+
+
+
+
+open_lvl2:
+    call sc_game_lvl2

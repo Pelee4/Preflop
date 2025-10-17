@@ -8,6 +8,19 @@ include "src/engine/enemies/enemy1_data.inc"
 
 SECTION "Collisions_logic", ROM0
 
+;;Convierte la posicion del sprite a posicion de tile map y la guarda en hl
+get_tilemap_pos_player:
+
+   ld a, [player_data + PLAYER_Y]
+   call convert_y_to_ty
+   ld l, a
+   ld a, [player_data + PLAYER_X]
+   call convert_x_to_tx
+   call calculate_address_from_tx_and_ty
+
+ret
+
+
 
 ;#####  CHECK_COLLISIONS  ##############################################################################
 ; - WE CALL IT RIGHT AFTER THE PLAYER MOVES (BEFORE UDPATING THE SPRITE)
@@ -16,43 +29,17 @@ SECTION "Collisions_logic", ROM0
 ;#######################################################################################################
 
 check_collision::
-   ;; Carga posiciones del jugador y enemigo
-   ld a, [player_data + PLAYER_X]
-   ld b, a
-   ld a, [player_data + PLAYER_Y]
-   ld c, a
+   ; Load player's position
+   call get_tilemap_pos_player
+   ; checks if the player moves to a void block -> dies
+   call check_empty_tile
+   ; checks if the player is in a stair -> changes lvl
+   call check_stairs
+   ; checks if the player face a solid block -> returns player_x & player_y to its previous position
+   ;call check_solid
 
-   ld a, [enemy_data + ENEMY_X]
-   ld d, a
-   ld a, [enemy_data + ENEMY_Y]
-   ld e, a
+ret
 
-   ld a, b
-   sub d
-   bit 7, a          
-   jr z, check_y
-   cpl
-   inc a
-check_y:
-   cp 8
-   jr nc, no_collision
-
-   ld a, c
-   sub e
-   bit 7, a
-   jr z, collision_check
-   cpl
-   inc a
-collision_check:
-   cp 8
-   jr nc, no_collision
-
-   ;; Si hay colisión 
-   call on_player_death
-   jr no_collision
-
-no_collision:
-   ret
 
 
 
@@ -74,8 +61,7 @@ ret
 ;#######################################################################################################
 
 ;;comprobar si te estas tocando (jeje) con el vacío
-check_coll_empty_tile::
-   call get_tilemap_pos_player
+check_empty_tile::
    ld a, [hl]
    cp $18
    ret nz
@@ -83,19 +69,35 @@ check_coll_empty_tile::
    call sc_game_lvl1
 ret
 
-;;Convierte la posicion del sprite a posicion de tile map
-get_tilemap_pos_player:
 
-   ld a, [player_data + PLAYER_Y]
-   call convert_y_to_ty
-   ld l, a
-   ld a, [player_data + PLAYER_X]
-   call convert_x_to_tx
-   call calculate_address_from_tx_and_ty
 
+check_stairs::
+   ld a, [hl]
+   cp $00
+   ret nz
+   ;;if its a stair, changes level (updates the player_level data and calls the lvl_manager)
+   ld a, [player_data + PLAYER_LEVEL]
+   inc a
+   ld [player_data + PLAYER_LEVEL], a
+   call change_level_manager
 ret
 
-;;Movidas
+
+check_solid::
+   ld a, [hl]
+   cp $00
+   ret nz
+   ;;if its a block, returns player to previous position
+   ;ld a, [player_data + PLAYER_PREVIOUS_X]
+   ;ld [player_data + PLAYER_X], a
+   ;ld a, [player_data + PLAYER_PREVIOUS_Y]
+   ;ld [player_data + PLAYER_Y], a
+ret
+
+
+
+
+;;To take the player tile
 convert_y_to_ty:
 
    sub 16
