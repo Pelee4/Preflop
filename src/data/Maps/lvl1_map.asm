@@ -18,7 +18,7 @@ def map1Width  EQU 20
 def map1Height EQU 18
 def map1Bank   EQU 0
 
- SECTION "Tilemaps", ROM0
+SECTION "Tilemap lvl1", ROM0
 
 map1::
 	DB $18,$18,$18,$18,$18,$18,$18,$18,$18,$18
