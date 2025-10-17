@@ -8,17 +8,17 @@ include "src/engine/enemies/enemy1_data.inc"
 
 
 
-SECTION "Lvl1 scene", ROM0
+SECTION "Lvl2 scene", ROM0
 
-sc_game_lvl1::
-    call sc_game_lvl1_init
-    loop_lvl1:
+sc_game_lvl2::
+    call sc_game_lvl2_init
+    loop_lvl2:
         call read_input
         call read_input_buttons
         call check_collision
-        jr loop_lvl1
+        jr loop_lvl2
     ret
-sc_game_lvl1_init::
+sc_game_lvl2_init::
    ;===========================
    ;; SCREEN OFF
    ;===========================
@@ -27,6 +27,16 @@ sc_game_lvl1_init::
    call Tiles_Init
 
    
+   ;MAP DRAW
+   MEMCPY_2 map1, $9800, 576
+
+   
+
+   ;DRAW PLAYER AND ENEMIES
+   MEMCPY Mr_floor_sprite, $8280, $40  ;28 29 30 31
+   MEMCPY Enemy_Sprite, $8200, $40     ;20 21 22 23
+
+
 
    ;;PALETTES
    ld hl, rBGP
@@ -47,12 +57,12 @@ sc_game_lvl1_init::
    ;;INITIALIZE PLAYER_DATA ON 0
    ld a, 80
    ld [player_data + PLAYER_Y], a
-   ;ld a, 80
-   ;ld [player_data + PLAYER_PREVIOUS_Y], a
+;    ld a, 80
+;    ld [player_data + PLAYER_PREVIOUS_Y], a
    ld a, 48
    ld [player_data + PLAYER_X], a
-   ;ld a, 48
-   ;ld [player_data + PLAYER_PREVIOUS_X], a
+;    ld a, 48
+;    ld [player_data + PLAYER_PREVIOUS_X], a
    ld a, 0
    ld [player_data + PLAYER_ISMOVING], a
    ld a, 3
@@ -61,8 +71,6 @@ sc_game_lvl1_init::
    ld [player_data + PLAYER_TIMER], a
    ld a, 0
    ld [player_data + PLAYER_INT_BOOL], a
-   ld a, 1
-   ld [player_data + PLAYER_LEVEL], a
 
 
    ; WRITES SPRITES ON SCREEN
@@ -75,29 +83,11 @@ sc_game_lvl1_init::
  
 
 
-
-
-    ;DRAW PLAYER AND ENEMIES
-    MEMCPY Mr_floor_sprite, $8280, $40  ;28 29 30 31
-    MEMCPY Enemy_Sprite, $8200, $40     ;20 21 22 23
-
-
-
-    ;MAP DRAW
-    MEMCPY_2 map1, $9800, 576
-
-
-    ; PLAYER INITIAL POSITION
-    ld a, 48
-    ld [player_data + PLAYER_X], a
-    ld a, 80
-    ld [player_data + PLAYER_Y], a
-
-    ; ENEMIES INITIAL POSITION
-    ld a, 80
-    ld [enemy_data + ENEMY_X], a
-    ld a, 40
-    ld [enemy_data + ENEMY_Y], a
+    ;; ENEMIES INITIAL POSITION
+   ld a, 80
+   ld [enemy_data + ENEMY_X], a
+   ld a, 40
+   ld [enemy_data + ENEMY_Y], a
    
 
 
