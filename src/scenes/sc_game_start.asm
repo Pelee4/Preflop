@@ -18,14 +18,21 @@ sc_game_start_init::
 
     call lcd_off
     ;MEMSET $9800, 0, 576
-    ;;Copiamos los tiles
+    ;;Copiamos los 
+    
+    ;;PALETTES
+   ld hl, rBGP
+   ld [hl], %00100111
+
+   ld hl, rOBJP
+   ld [hl], %11100100
     
     MEMSET $9904, 0, 13
     MEMSET $9924, 0, 13
-    MEMCPY PreflopLogoTiles, $8000, 144
+    MEMCPY_2 PantallaInicio, $8000, 2000
 
     ;;copiamos a la pantalla
-    MEMCPY PreflopLogoMap, $9800, 360
+    MEMCPY_2 PantallaInicioMap, $9800, 576
 
     call lcd_on
 
