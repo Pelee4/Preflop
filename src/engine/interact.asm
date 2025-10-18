@@ -88,6 +88,9 @@ ret
 up_tile:
     ld a, l
     sbc e
+    jr nc, .next
+        dec h
+    .next:
     ld l, a
     ld a, [hl]
     cp $18

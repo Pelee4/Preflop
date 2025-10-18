@@ -56,10 +56,6 @@ SECTION "Player functions", ROM0
 ret
 
 
-
-
-
-
 start_move::
    ld a, 1
    ld [player_data + PLAYER_ISMOVING], a
@@ -107,6 +103,7 @@ start_move::
       sub 16
       ld [player_data + PLAYER_Y], a
       call wait_vblank_start
+      call Flip_sprite_up
       call update_sprite
    jr skip
 
@@ -117,6 +114,7 @@ start_move::
       add 16
       ld [player_data + PLAYER_Y], a
       call wait_vblank_start
+      call Flip_sprite_down
       call update_sprite
    jr skip
 
@@ -172,6 +170,30 @@ Flip_sprite_left:
 
    ld hl, TILE_RIGHT_SPRITE
    ld [hl], $2A
+ret
+
+;;To flip sprite to left
+Flip_sprite_down:
+   ld hl, TILE_LEFT_SPRITE
+   ld a, [hl]
+   cp $30
+   ret z ;;If the sprite is already on this flip, stop the rutine
+   ld [hl], $30
+
+   ld hl, TILE_RIGHT_SPRITE
+   ld [hl], $32
+ret
+
+;;To flip sprite to left
+Flip_sprite_up:
+   ld hl, TILE_LEFT_SPRITE
+   ld a, [hl]
+   cp $34
+   ret z ;;If the sprite is already on this flip, stop the rutine
+   ld [hl], $34
+
+   ld hl, TILE_RIGHT_SPRITE
+   ld [hl], $36
 ret
 
 
