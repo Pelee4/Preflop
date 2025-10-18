@@ -76,7 +76,7 @@ start_move::
    cp 3                   ; DOWN
    jr z, move_down
    
-   jr skipS
+   jr skip
 
    move_right:
       ; ld a, [player_data + PLAYER_X]
