@@ -33,9 +33,9 @@ sc_game_lvl2_init::
    
 
    ;DRAW PLAYER AND ENEMIES
-   MEMCPY Mr_floor_sprite, $8280, $40  ;28 29 30 31
-   MEMCPY Enemy_Sprite, $8200, $40     ;20 21 22 23
-
+   MEMCPY Mr_floor_sprite, $8280, $40        ;28 29 2A 2B
+   MEMCPY Enemy_Sprite, $8200, $40           ;20 21 22 23
+   MEMCPY Mr_floor_sprite_flip, $82C0, $40   ;2C 2D 2E 2F
 
 
    ;;PALETTES

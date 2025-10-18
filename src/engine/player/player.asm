@@ -76,7 +76,7 @@ start_move::
    cp 3                   ; DOWN
    jr z, move_down
    
-   jr skip
+   jr skipS
 
    move_right:
       ; ld a, [player_data + PLAYER_X]
@@ -84,6 +84,8 @@ start_move::
       ld a, [player_data + PLAYER_X]
       add 16
       ld [player_data + PLAYER_X], a
+      call wait_vblank_start
+      call Flip_sprite_right
       call update_sprite
    jr skip
 
@@ -93,6 +95,8 @@ start_move::
       ld a, [player_data + PLAYER_X]
       sub 16
       ld [player_data + PLAYER_X], a
+      call wait_vblank_start
+      call Flip_sprite_left
       call update_sprite
    jr skip
 
@@ -102,6 +106,7 @@ start_move::
       ld a, [player_data + PLAYER_Y]
       sub 16
       ld [player_data + PLAYER_Y], a
+      call wait_vblank_start
       call update_sprite
    jr skip
 
@@ -111,6 +116,7 @@ start_move::
       ld a, [player_data + PLAYER_Y]
       add 16
       ld [player_data + PLAYER_Y], a
+      call wait_vblank_start
       call update_sprite
    jr skip
 
@@ -134,7 +140,6 @@ skip_end:
    ret
 
 update_sprite::
-   call wait_vblank_start
    ld a, [player_data + PLAYER_Y]
    ld [$FE00], a
    ld [$FE00 + 4], a
@@ -145,6 +150,29 @@ update_sprite::
    ld [$FE00 + 5], a
 ret
 
+;;To flip sprite to right
+Flip_sprite_right:
+   ld hl, TILE_LEFT_SPRITE
+   ld a, [hl]
+   cp $2C
+   ret z ;;If the sprite is already on this flip, stop the rutine
+   ld [hl], $2C
+
+   ld hl, TILE_RIGHT_SPRITE
+   ld [hl], $2E
+ret
+
+;;To flip sprite to left
+Flip_sprite_left:
+   ld hl, TILE_LEFT_SPRITE
+   ld a, [hl]
+   cp $28
+   ret z ;;If the sprite is already on this flip, stop the rutine
+   ld [hl], $28
+
+   ld hl, TILE_RIGHT_SPRITE
+   ld [hl], $2A
+ret
 
 
 ; by the moment it does nothing because the player dies instantly 
