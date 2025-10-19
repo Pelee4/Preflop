@@ -1,0 +1,195 @@
+SUMMARY:
+	ROM0: 10201 bytes used / 6183 free
+	WRAM0: 95 bytes used / 4001 free
+	HRAM: 4 bytes used / 123 free
+
+ROM0 bank #0:
+	SECTION: $0000-$0043 ($0044 bytes) ["Initialize tiles"]
+	         $0000 = Tiles_Init
+	EMPTY: $0044-$0047 ($0004 bytes)
+	SECTION: $0048-$00e8 ($00a1 bytes) ["Interrupts"]
+	         $0048 = HBlankInterrupt
+	         $0081 = HBlankInterrupt.scale_12
+	         $008f = HBlankInterrupt.scale_8
+	         $0092 = HBlankInterrupt.apply
+	         $0095 = HBlankInterrupt.done
+	         $009a = UpdateSineOffset
+	         $00ca = UpdateSineOffset.ok
+	         $00d1 = UpdateSineOffset.stop
+	         $00d9 = UpdateSineOffset.ret
+	         $00da = UpdateSineOffset.store
+	         $00de = StopWaveEffect
+	SECTION: $00e9-$00fe ($0016 bytes) ["Level_manager_stuff"]
+	         $00e9 = get_player_level
+	         $00ed = change_level_manager
+	         $00f9 = open_lvl2
+	         $00fc = open_lvl3
+	EMPTY: $00ff-$00ff ($0001 byte)
+	SECTION: $0100-$014f ($0050 bytes) ["Header"]
+	SECTION: $0150-$0157 ($0008 bytes) ["Entry point"]
+	         $0150 = main
+	SECTION: $0158-$0937 ($07e0 bytes) ["TilesInicio"]
+	         $0158 = PantallaInicio
+	SECTION: $0938-$0fe7 ($06b0 bytes) ["TilesMuerte"]
+	         $0938 = PantallaMuerte
+	SECTION: $0fe8-$1227 ($0240 bytes) ["muerte tilemap"]
+	         $0fe8 = PantallaMuerteMap
+	SECTION: $1228-$1467 ($0240 bytes) ["tiles map 3"]
+	         $1228 = map3
+	SECTION: $1468-$16a7 ($0240 bytes) ["Tilemap lvl2"]
+	         $1468 = map2
+	SECTION: $16a8-$18e7 ($0240 bytes) ["LOGO MENU"]
+	         $16a8 = PreflopLogoMap
+	SECTION: $18e8-$1b27 ($0240 bytes) ["menu tilemap"]
+	         $18e8 = PantallaInicioMap
+	SECTION: $1b28-$1d67 ($0240 bytes) ["Tilemap lvl1"]
+	         $1b28 = map1
+	SECTION: $1d68-$1f27 ($01c0 bytes) ["TileSets"]
+	         $1d68 = TileEnvironment
+	SECTION: $1f28-$20a7 ($0180 bytes) ["Sprites DEF"]
+	         $1f28 = Mr_floor_sprite
+	         $1f68 = Mr_floor_sprite_flip
+	         $1fa8 = Mr_floor_sprite_down
+	         $1fe8 = Mr_floor_sprite_up
+	         $2028 = Rock_Sprite
+	         $2068 = Enemy_Sprite
+	SECTION: $20a8-$221d ($0176 bytes) ["Player functions"]
+	         $20a8 = start_move_right
+	         $20b4 = start_move_left
+	         $20c0 = start_move_up
+	         $20cc = start_move_down
+	         $20d8 = moving
+	         $20dc = start_move
+	         $20fa = move_right
+	         $210d = move_left
+	         $2120 = move_up
+	         $2133 = move_down
+	         $2146 = skip
+	         $214a = update_move
+	         $215f = skip_end
+	         $2160 = update_sprite
+	         $2175 = Flip_sprite_right
+	         $2184 = Flip_sprite_left
+	         $2193 = Flip_sprite_down
+	         $21a2 = Flip_sprite_up
+	         $21b1 = take_damage
+	         $21b5 = on_player_death
+	         $21ca = can_move
+	         $21da = check_right
+	         $21ea = check_left
+	         $21f8 = check_up
+	         $2200 = check_up.next
+	         $220d = check_down
+	SECTION: $221e-$2300 ($00e3 bytes) ["Interaction"]
+	         $221e = Interact
+	         $2234 = call_right_tile
+	         $223b = call_left_tile
+	         $2242 = call_up_tile
+	         $2249 = call_down_tile
+	         $2251 = right_tile
+	         $2264 = check_empty_right
+	         $226e = left_tile
+	         $2282 = check_empty_left
+	         $228c = up_tile
+	         $2291 = up_tile.next
+	         $22a4 = check_empty_up
+	         $22ae = down_tile
+	         $22c1 = check_empty_down
+	         $22cb = put_floor
+	         $22e6 = put_empty
+	SECTION: $2301-$2399 ($0099 bytes) ["Lvl1 scene"]
+	         $2301 = sc_game_lvl1
+	         $2304 = loop_lvl1
+	         $2310 = sc_game_lvl1_init
+	SECTION: $239a-$242d ($0094 bytes) ["Sine table"]
+	         $239a = SineTable
+	         $241a = read_a
+	         $241a = SineTableEnd
+	SECTION: $242e-$24bd ($0090 bytes) ["Tiles"]
+	         $242e = PreflopLogoTiles
+	SECTION: $24be-$2531 ($0074 bytes) ["Menu scene"]
+	         $24be = sc_game_start
+	         $24c1 = sc_game_start.loop
+	         $24d5 = sc_game_start_init
+	SECTION: $2532-$25a5 ($0074 bytes) ["Lvl3 scene"]
+	         $2532 = sc_game_lvl3
+	         $2535 = loop_lvl3
+	         $2541 = sc_game_lvl3_init
+	SECTION: $25a6-$2619 ($0074 bytes) ["Lvl2 scene"]
+	         $25a6 = sc_game_lvl2
+	         $25a9 = loop_lvl2
+	         $25b5 = sc_game_lvl2_init
+	SECTION: $261a-$2686 ($006d bytes) ["Death scene"]
+	         $261a = sc_game_death
+	         $2623 = sc_game_death.loop
+	         $262d = sc_game_death_init
+	         $2673 = read_a_death
+	SECTION: $2687-$26f0 ($006a bytes) ["Inputs"]
+	         $2687 = read_input
+	         $26c7 = read_input_buttons
+	SECTION: $26f1-$274a ($005a bytes) ["Collisions_logic"]
+	         $26f1 = get_tilemap_pos_player
+	         $2702 = check_solid
+	         $2709 = check_collision
+	         $2713 = check_hit
+	         $2714 = check_empty_tile
+	         $271c = check_stairs
+	         $272b = convert_y_to_ty
+	         $2734 = convert_x_to_tx
+	         $273d = calculate_address_from_tx_and_ty
+	SECTION: $274b-$2781 ($0037 bytes) ["Entity Manager Code"]
+	         $274b = man_entity_init
+	         $2760 = man_entity_init.loop
+	         $2767 = man_entity_alloc
+	         $276d = man_entity_alloc.loop
+	         $2775 = man_entity_alloc.found
+	         $277c = man_entity_get_sprite_components
+	SECTION: $2782-$27b0 ($002f bytes) ["Utils"]
+	         $2782 = lcd_off
+	         $278d = lcd_on
+	         $2793 = wait_vblank_start
+	         $2798 = wait_vblank_start.loop
+	         $279c = memcpy_256
+	         $27a3 = memcpy
+	         $27ac = memset_256
+	SECTION: $27b1-$27d0 ($0020 bytes) ["Sprites definition"]
+	         $27b1 = sprite1_player_l1
+	         $27b5 = sprite2_player_l1
+	         $27b9 = sprite1_enemy_l1
+	         $27bd = sprite2_enemy_l1
+	         $27c1 = sprite1_player_l2
+	         $27c5 = sprite2_player_l2
+	         $27c9 = sprite1_player_l3
+	         $27cd = sprite2_player_l3
+	SECTION: $27d1-$27dd ($000d bytes) ["Render System Code"]
+	         $27d1 = sys_render_update
+	EMPTY: $27de-$3fff ($1822 bytes)
+	TOTAL EMPTY: $1827 bytes
+
+WRAM0 bank #0:
+	SECTION: $c000-$c050 ($0051 bytes) ["Entity Manager Data"]
+	         $c000 = sprite_components
+	         $c000 = components
+	         $c050 = sprite_components_end
+	         $c050 = alive_entitites
+	SECTION: $c051-$c057 ($0007 bytes) ["Player Vars"]
+	         $c051 = player_data
+	SECTION: $c058-$c05c ($0005 bytes) ["GameStart Vars"]
+	         $c058 = wSinePhase
+	         $c059 = wSineFrameCounter
+	         $c05a = wSineActive
+	         $c05b = wSineAmplitude
+	         $c05c = wSineCycleCount
+	SECTION: $c05d-$c05e ($0002 bytes) ["Enemy vars"]
+	         $c05d = enemy_data
+	EMPTY: $c05f-$cfff ($0fa1 bytes)
+	TOTAL EMPTY: $0fa1 bytes
+
+HRAM bank #0:
+	SECTION: $ff80-$ff83 ($0004 bytes) ["Flanco things"]
+	         $ff80 = estadoPad
+	         $ff81 = flancoPad
+	         $ff82 = estadoBotones
+	         $ff83 = flancoBotones
+	EMPTY: $ff84-$fffe ($007b bytes)
+	TOTAL EMPTY: $007b bytes

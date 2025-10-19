@@ -28,27 +28,31 @@ SECTION "Player functions", ROM0
 
 
    start_move_right:
+      call get_tilemap_pos_player ;now hl = player_pos 
       ld a, 0
       ld [player_data + PLAYER_DIR], a
-      call start_move
+      call can_move
       ret
 
    start_move_left:
+      call get_tilemap_pos_player
       ld a, 1
       ld [player_data + PLAYER_DIR], a
-      call start_move
+      call can_move
       ret
 
    start_move_up:
+      call get_tilemap_pos_player
       ld a, 2
       ld [player_data + PLAYER_DIR], a
-      call start_move
+      call can_move
       ret
 
    start_move_down:
+      call get_tilemap_pos_player
       ld a, 3
       ld [player_data + PLAYER_DIR], a
-      call start_move
+      call can_move
       ret
 
    moving:
@@ -219,3 +223,64 @@ on_player_death::
    ld [player_data + PLAYER_TIMER], a
 
 ret
+
+
+
+;; CHECK IF THE BLOCKING WHERE HE IS GOING TO MOVE IS SOLID OR NOT, SO IT CAN MOVE OR NOT
+can_move::
+   cp a, 0
+        jr z, check_right
+   cp a, 1
+      jr z, check_left
+   cp a, 2
+      jr z, check_up
+   cp a, 3
+      jr z, check_down
+
+
+   check_right:
+      ld de, $0002
+      add hl, de
+      call check_solid
+      cp a, $FF
+      ret nz
+      ld a, 0
+      call start_move
+   ret
+   check_left:
+      dec hl
+      dec hl
+      call check_solid
+      cp a, $FF
+      ret nz
+      ld a, 1
+      call start_move
+   ret
+   check_up:
+      ld de, $0040
+      ld a, l
+      sbc e
+      jr nc, .next
+         dec h
+      .next:
+      ld l, a
+      call check_solid
+      cp a, $FF
+      ret nz
+      ld a, 2
+      call start_move
+   ret
+   check_down:
+      ld de, $0040 
+      add hl, de
+      call check_solid
+      cp a, $FF
+      ret nz
+      ld a, 3
+      call start_move
+   ret
+
+ret
+
+
+

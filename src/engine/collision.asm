@@ -22,6 +22,33 @@ ret
 
 
 
+
+
+
+
+;; IT IS CALLED BEFORE THE NEXT COLLISION CHECKS (BECAUSE THE PLAYER WONT MOVE IF ITS SOLID)
+;; IF ITS SOLID, A = $FF
+check_solid::
+; it takes hl from player.asm (because here we want to check if the next block 
+; is a collision or not, so we will let the player move or not)
+   ld a, [hl]
+   cp $10
+   ret z
+   ld a, $FF
+   ;;if its a block, returns player to previous position
+   ; ld a, [player_data + PLAYER_PREVIOUS_X]
+   ; ld [player_data + PLAYER_X], a
+   ; ld a, [player_data + PLAYER_PREVIOUS_Y]
+   ; ld [player_data + PLAYER_Y], a
+ret
+
+
+
+
+
+
+
+
 ;#####  CHECK_COLLISIONS  ##############################################################################
 ; - WE CALL IT RIGHT AFTER THE PLAYER MOVES (BEFORE UDPATING THE SPRITE)
 ; - IT CHECKS IF THE PLAYER HAS MOVED TO AN INVALID POSITION SO IT RETURN HIM TO THE PREVIOUS ONE
@@ -44,9 +71,6 @@ ret
 
 
 
-
-
-
 ;#####  CHECK_HIT  ##############################################################################
 ; - WE CALL IT RIGHT AFTER THE ENTITIES MOVE (WITH THE ECS)
 ; - IT CHECKS IF THE PLAYER HAS BEEN HIT BY AN ENEMY SO IT CALLS TAKE_DAMAGE FUNCTION FROM PLAYER.ASM
@@ -55,10 +79,9 @@ check_hit::
 
 ret
 
-;#####  CHECK_EMPTY_TILE  ##############################################################################
-; - WE CALL IT RIGHT AFTER THE ENTITIES MOVE (WITH THE ECS)
-; - IT CHECKS IF THE PLAYER HAS BEEN HIT BY AN ENEMY SO IT CALLS TAKE_DAMAGE FUNCTION FROM PLAYER.ASM
-;#######################################################################################################
+
+
+
 
 ;;comprobar si te estas tocando (jeje) con el vacío
 check_empty_tile::
@@ -68,6 +91,10 @@ check_empty_tile::
    ;;AQUI VA LA MUERTE, de momento he puesto reset del lvl 1S
    jp sc_game_death
 ret
+
+
+
+
 
 
 
@@ -83,21 +110,15 @@ check_stairs::
 ret
 
 
-check_solid::
-   ld a, [hl]
-   cp $00
-   ret nz
-   ;;if its a block, returns player to previous position
-   ;ld a, [player_data + PLAYER_PREVIOUS_X]
-   ;ld [player_data + PLAYER_X], a
-   ;ld a, [player_data + PLAYER_PREVIOUS_Y]
-   ;ld [player_data + PLAYER_Y], a
-ret
 
 
 
 
-;;To take the player tile
+
+
+
+
+;;To get the player tile
 convert_y_to_ty:
 
    sub 16
