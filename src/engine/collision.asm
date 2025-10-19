@@ -66,7 +66,7 @@ check_empty_tile::
    cp $18
    ret nz
    ;;AQUI VA LA MUERTE, de momento he puesto reset del lvl 1S
-   call sc_game_lvl1
+   jp sc_game_death
 ret
 
 
