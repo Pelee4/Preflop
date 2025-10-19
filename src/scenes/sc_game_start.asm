@@ -1,6 +1,5 @@
 ;; ------------------------------------------------------------
-;; MENU CON EFECTO X SINE (basado en DeadCScroll)
-;; con fade-out suave de ~5 segundos REAL
+;; MENU (con cocinada de efecto)
 ;; ------------------------------------------------------------
 include "includes/constants.inc"
 include "includes/macros.inc"
@@ -14,11 +13,19 @@ sc_game_start::
     call read_a
     cp $FF
     jr nz, .loop
+
+    ;; --------------------------------------------------------
+    ;; Botón A pulsado → detener efecto antes de salir
+    ;; --------------------------------------------------------
+    di                          ; para desactivar interrupciones q tocan las pelotillas
+    xor a
+    ld [wSineActive], a         ; marcar efecto como inactivo
+    call StopWaveEffect         ; limpiar STAT/IE y restaurar SCX
+    ei                          ; reactivar interrupciones si se requiere
 ret
 
 
 sc_game_start_init::
-
     call lcd_off
     
     ;; PALETAS
@@ -158,8 +165,6 @@ UpdateSineOffset::
     ld [wSineCycleCount], a
     
     ; Fade-out gradual: reducir 1 punto cada ciclo
-    ; 128 fases / 10Hz = 12.8s por ciclo -> muy lento
-    ; Reducimos amplitud cada ciclo para que dure ~5 segundos
     cp 4                     ; después de 4 ciclos, detener
     jr nc, .stop
     
@@ -204,7 +209,6 @@ StopWaveEffect::
 ;; ------------------------------------------------------------
 SECTION "Sine table", ROM0
 SineTable:
-    ; ciclo de saltos con los valores (con tabla numerica que me ha ofrecido chat)
     db 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
     db 16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1
     db 0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15
