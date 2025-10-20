@@ -16,6 +16,7 @@ sc_game_lvl1::
         call read_input
         call read_input_buttons
         call check_collision
+        call HUD_Update
         jr loop_lvl1
     ret
 
@@ -84,13 +85,15 @@ sc_game_lvl1_init::
     ld [enemy_data + ENEMY_Y], a
    
 
-
+    
 
    ;===========================
    ; SCREEN ON
    ;===========================
 
    call lcd_on
+   
+   call HUD_Init
 ret
 
 

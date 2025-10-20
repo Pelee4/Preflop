@@ -16,6 +16,7 @@ sc_game_lvl2::
         call read_input
         call read_input_buttons
         call check_collision
+        call HUD_Update
         jr loop_lvl2
     ret
 sc_game_lvl2_init::
@@ -88,6 +89,8 @@ sc_game_lvl2_init::
    ;===========================
 
    call lcd_on
+
+   call HUD_Init
 ret
 
 
