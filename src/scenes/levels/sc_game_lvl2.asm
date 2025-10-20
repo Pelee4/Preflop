@@ -63,6 +63,8 @@ sc_game_lvl2_init::
    ld [player_data + PLAYER_TIMER], a
    ld a, 0
    ld [player_data + PLAYER_INT_BOOL], a
+   ld a, 2
+   ld [player_data + PLAYER_LEVEL], a
 
 
    ; WRITES SPRITES ON SCREEN

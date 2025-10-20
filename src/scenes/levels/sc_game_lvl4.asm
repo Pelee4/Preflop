@@ -8,17 +8,17 @@ include "src/engine/enemies/enemy1_data.inc"
 
 
 
-SECTION "Lvl3 scene", ROM0
+SECTION "Lvl4 scene", ROM0
 
-sc_game_lvl3::
-    call sc_game_lvl3_init
-    loop_lvl3:
+sc_game_lvl4::
+    call sc_game_lvl4_init
+    loop_lvl4:
         call read_input
         call read_input_buttons
         call check_collision
-        jr loop_lvl3
+        jr loop_lvl4
     ret
-sc_game_lvl3_init::
+sc_game_lvl4_init::
    ;===========================
    ;; SCREEN OFF
    ;===========================
@@ -28,7 +28,7 @@ sc_game_lvl3_init::
 
    
    ;MAP DRAW
-   MEMCPY_2 map3, $9800, 576
+   MEMCPY_2 map4, $9800, 576
 
    ;;PALETTES
    ld hl, rBGP
@@ -47,7 +47,7 @@ sc_game_lvl3_init::
    MEMSET $FE00, 0, 160
 
    ;;INITIALIZE PLAYER_DATA ON 0
-   ld a, 80
+   ld a, 48
    ld [player_data + PLAYER_Y], a
 ;    ld a, 80
 ;    ld [player_data + PLAYER_PREVIOUS_Y], a
@@ -63,14 +63,14 @@ sc_game_lvl3_init::
    ld [player_data + PLAYER_TIMER], a
    ld a, 0
    ld [player_data + PLAYER_INT_BOOL], a
-   ld a, 3
+   ld a, 4
    ld [player_data + PLAYER_LEVEL], a
 
 
    ; WRITES SPRITES ON SCREEN
    ; - PLAYER
-   MEMCPY sprite1_player_l3, $FE00, 4
-   MEMCPY sprite2_player_l3, $FE00 + 4, 4
+   MEMCPY sprite1_player_l4, $FE00, 4
+   MEMCPY sprite2_player_l4, $FE00 + 4, 4
  
 
 
