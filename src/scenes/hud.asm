@@ -13,8 +13,8 @@ include "engine/player/player_data.inc"
 ; =============================================================================
 DEF HUD_TILE_X EQU 17       ; Posición X en el tilemap (columna 17 de 20)
 DEF HUD_TILE_Y EQU 1        ; Posición Y en el tilemap (fila 1)
-DEF HUD_TILE_BLOCK EQU $14  ; Tile del bloque (el mismo del suelo)
-DEF HUD_TILE_EMPTY EQU $18  ; Tile vacío
+DEF HUD_TILE_BLOCK EQU $7D  ; Tile del bloque (el mismo del suelo)
+DEF HUD_TILE_EMPTY EQU $7C  ; Tile vacío
 
 ; Cálculo de dirección en VRAM: $9800 + (Y * 32) + X
 ; Para Y=1, X=17: $9800 + 32 + 17 = $9800 + 49 = $9831
