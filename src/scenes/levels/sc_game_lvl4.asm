@@ -51,12 +51,8 @@ sc_game_lvl4_init::
    ;;INITIALIZE PLAYER_DATA ON 0
    ld a, 48
    ld [player_data + PLAYER_Y], a
-;    ld a, 80
-;    ld [player_data + PLAYER_PREVIOUS_Y], a
    ld a, 24
    ld [player_data + PLAYER_X], a
-;    ld a, 48
-;    ld [player_data + PLAYER_PREVIOUS_X], a
    ld a, 0
    ld [player_data + PLAYER_ISMOVING], a
    ld a, 3
@@ -75,25 +71,36 @@ sc_game_lvl4_init::
    MEMCPY sprite2_player_l4, $FE00 + 4, 4
  
    ; --- HUD sprite ---
-    ; define HUD en $FE00+16
-    ; por ahora ponlo fuera de pantalla (oculto)
-    ld a,0              ; Y = 0 --> oculto
-    ld [$FE00+16],a
-    ld a,160            ; X = da igual oculto
-    ld [$FE00+17],a
-    ld a,$7C            ; tile HUD (el tile del icono HUD, el existente en MEMCPY Hud)
-    ld [$FE00+18],a
-    ld a,%00000000      ; attr
-    ld [$FE00+19],a
-
-    ;; ENEMIES INITIAL POSITION
-   ;ld a, 80
-   ;ld [enemy_data + ENEMY_X], a
-   ;ld a, 40
-   ;ld [enemy_data + ENEMY_Y], a
-   
+   ; define HUD en $FE00+16
+   ; por ahora ponlo fuera de pantalla (oculto)
+   ld a,0              ; Y = 0 --> oculto
+   ld [$FE00+16],a
+   ld a,160            ; X = da igual oculto
+   ld [$FE00+17],a
+   ld a,$7C            ; tile HUD (el tile del icono HUD, el existente en MEMCPY Hud)
+   ld [$FE00+18],a
+   ld a,%00000000      ; attr
+   ld [$FE00+19],a
 
 
+
+
+
+   ; ENEMIES DATA
+   ld a, 48
+   ld [enemy_data + ENEMY_X], a
+   ld a, 24
+   ld [enemy_data + ENEMY_Y], a
+   ld a, DIR_LEFT
+   ld [enemy_data + ENEMY_DIR], a
+   ld a, 20
+   ld [enemy_data + ENEMY_SPRITEID], a
+
+   MEMCPY sprite1_enemy_l1, $FE00 + (20 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+   MEMCPY sprite2_enemy_l1, $FE00 + (21 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+
+
+   call init_entities
 
    ;===========================
    ; SCREEN ON

@@ -17,7 +17,7 @@ sc_game_lvl1::
         call read_input
         call read_input_buttons
         call check_collision
-        call HUD_Update          ; <<-- AHORA SÍ, SOLO DENTRO VBLANK
+        call HUD_Update
         jr loop_lvl1
     ret
 
@@ -67,13 +67,31 @@ sc_game_lvl1_init::
    ld [player_data + PLAYER_LEVEL], a
 
 
-   ; WRITES SPRITES ON SCREEN
    ; - PLAYER
-   MEMCPY sprite1_player_l1, $FE00, 4
-   MEMCPY sprite2_player_l1, $FE00 + 4, 4
-   ; - ENEMIES
-   MEMCPY sprite1_enemy_l1, $FE00 + 8, 4
-   MEMCPY sprite2_enemy_l1, $FE00 + 12, 4
+   MEMCPY sprite1_player_l1, $FE00, SPRITE_BYTE_SIZE
+   MEMCPY sprite2_player_l1, $FE00 + SPRITE_BYTE_SIZE, SPRITE_BYTE_SIZE
+
+
+
+    ; ENEMIES DATA
+    ld a, 80
+    ld [enemy_data + ENEMY_X], a
+    ld a, 40
+    ld [enemy_data + ENEMY_Y], a
+    ld a, DIR_LEFT
+    ld [enemy_data + ENEMY_DIR], a
+    ld a, 20
+    ld [enemy_data + ENEMY_SPRITEID], a
+   
+    MEMCPY sprite1_enemy_l1, $FE00 + (20 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+    MEMCPY sprite2_enemy_l1, $FE00 + (21 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+
+
+
+ 
+    ;MAP DRAW
+    MEMCPY_2 map1, $9800, 576
+
 
     ; --- HUD sprite ---
     ; define HUD en $FE00+16
@@ -86,19 +104,7 @@ sc_game_lvl1_init::
     ld [$FE00+18],a
     ld a,%00000000      ; attr
     ld [$FE00+19],a
- 
-    ;MAP DRAW
-    MEMCPY_2 map1, $9800, 576
 
-
-    ; ENEMIES INITIAL POSITION
-    ld a, 80
-    ld [enemy_data + ENEMY_X], a
-    ld a, 40
-    ld [enemy_data + ENEMY_Y], a
-   
-
-    
 
    ;===========================
    ; SCREEN ON
