@@ -13,10 +13,11 @@ SECTION "Lvl2 scene", ROM0
 sc_game_lvl2::
     call sc_game_lvl2_init
     loop_lvl2:
+        call wait_vblank_start   ; <<-- sincroniza AL INICIO de frame
         call read_input
         call read_input_buttons
         call check_collision
-        call HUD_Update
+        call HUD_Update 
         jr loop_lvl2
     ret
 sc_game_lvl2_init::
@@ -73,7 +74,17 @@ sc_game_lvl2_init::
    MEMCPY sprite1_player_l2, $FE00, 4
    MEMCPY sprite2_player_l2, $FE00 + 4, 4
  
-
+   ; --- HUD sprite ---
+    ; define HUD en $FE00+16
+    ; por ahora ponlo fuera de pantalla (oculto)
+    ld a,0              ; Y = 0 --> oculto
+    ld [$FE00+16],a
+    ld a,160            ; X = da igual oculto
+    ld [$FE00+17],a
+    ld a,$7C            ; tile HUD (el tile del icono HUD, el existente en MEMCPY Hud)
+    ld [$FE00+18],a
+    ld a,%00000000      ; attr
+    ld [$FE00+19],a
 
     ;; ENEMIES INITIAL POSITION
    ;ld a, 80

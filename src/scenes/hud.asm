@@ -16,6 +16,11 @@ DEF HUD_TILE_Y EQU 1        ; Posición Y en el tilemap (fila 1)
 DEF HUD_TILE_BLOCK EQU $7D  ; Tile del bloque (el mismo del suelo)
 DEF HUD_TILE_EMPTY EQU $7C  ; Tile vacío
 
+DEF HUD_SPR_Y EQU 16    ; ajustar a gusto (recuerda GB suma +16)
+DEF HUD_SPR_X EQU 152   ; cerca del borde (GB suma +8)
+
+DEF OAM_HUD EQU $FE00+16
+
 ; Cálculo de dirección en VRAM: $9800 + (Y * 32) + X
 ; Para Y=1, X=17: $9800 + 32 + 17 = $9800 + 49 = $9831
 DEF HUD_VRAM_ADDR EQU $9831
@@ -76,24 +81,17 @@ HUD_Update::
 ; HUD_Show - Muestra el icono del bloque
 ; -----------------------------------------------------------------------------
 HUD_Show::
-    call wait_vblank_start
-    
-    ; Escribimos el tile del bloque en la posición del HUD
-    ld hl, HUD_VRAM_ADDR
-    ld a, HUD_TILE_BLOCK
-    ld [hl], a
-    
+    ; Y
+    ld a, HUD_SPR_Y
+    ld [OAM_HUD+0], a
+    ; X
+    ld a, HUD_SPR_X
+    ld [OAM_HUD+1], a
+    ; tile ya estaba puesto en init (o aquí si prefieres cambiarlo)
     ret
 
-; -----------------------------------------------------------------------------
-; HUD_Hide - Oculta el icono del bloque
-; -----------------------------------------------------------------------------
 HUD_Hide::
-    call wait_vblank_start
-    
-    ; Escribimos un tile vacío en la posición del HUD
-    ld hl, HUD_VRAM_ADDR
-    ld a, HUD_TILE_EMPTY
-    ld [hl], a
-    
+    ; Método fácil: lo sacas fuera por Y=0
+    xor a
+    ld [OAM_HUD+0], a
     ret
