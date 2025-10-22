@@ -20,7 +20,16 @@ get_tilemap_pos_player:
 
 ret
 
+get_tilemap_pos_enemy:
 
+   ld a, [enemy_data + ENEMY_Y]
+   call convert_y_to_ty
+   ld l, a
+   ld a, [enemy_data + ENEMY_X]
+   call convert_x_to_tx
+   call calculate_address_from_tx_and_ty
+
+ret
 
 
 

@@ -1,4 +1,4 @@
-
+include "src/engine/enemies/enemy1_data.inc"
 
 SECTION "Enemy manager", ROM0
 
@@ -10,6 +10,9 @@ init_entities::
 ret
 
 move_entities::
+    ld a, [ENEMIES_START_OAM]
+    cp 0
+    ret z
     call enemy_moves_once
-
+    call enemy_update_sprite
 ret

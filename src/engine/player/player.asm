@@ -28,6 +28,7 @@ SECTION "Player functions", ROM0
 
 
    start_move_right:
+      call move_entities
       call get_tilemap_pos_player ;now hl = player_pos 
       ld a, 0
       ld [player_data + PLAYER_DIR], a
@@ -35,6 +36,7 @@ SECTION "Player functions", ROM0
       ret
 
    start_move_left:
+      call move_entities
       call get_tilemap_pos_player
       ld a, 1
       ld [player_data + PLAYER_DIR], a
@@ -42,6 +44,7 @@ SECTION "Player functions", ROM0
       ret
 
    start_move_up:
+      call move_entities
       call get_tilemap_pos_player
       ld a, 2
       ld [player_data + PLAYER_DIR], a
@@ -49,6 +52,7 @@ SECTION "Player functions", ROM0
       ret
 
    start_move_down:
+      call move_entities
       call get_tilemap_pos_player
       ld a, 3
       ld [player_data + PLAYER_DIR], a
