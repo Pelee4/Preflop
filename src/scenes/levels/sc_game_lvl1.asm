@@ -18,6 +18,7 @@ sc_game_lvl1::
         call read_input_buttons
         call check_collision
         call HUD_Update
+        call Player_Idle_Animate
         jr loop_lvl1
     ret
 
@@ -57,7 +58,7 @@ sc_game_lvl1_init::
    ;ld [player_data + PLAYER_PREVIOUS_X], a
    ld a, 0
    ld [player_data + PLAYER_ISMOVING], a
-   ld a, 3
+   ld a, 1
    ld [player_data + PLAYER_DIR], a
    ld a, 0
    ld [player_data + PLAYER_TIMER], a

@@ -16,6 +16,8 @@ include "src/engine/player/player_data.inc"
 SECTION "Player Vars", WRAM0
 
 player_data: DS PLAYER_SIZE
+wPlayerIdleTimer:: ds 1      ; contador independiente
+wPlayerIdleFrame:: ds 1      ; 0 = base, 1 = alterno   ; 0 = normal, 1 = frame alterno
 EXPORT player_data
 
 
@@ -199,6 +201,100 @@ Flip_sprite_up:
    ld hl, TILE_RIGHT_SPRITE
    ld [hl], $36
 ret
+
+;==============================================
+; IDLE ANIMATION (solo cuando mira hacia abajo)
+;==============================================
+Player_Idle_Animate::
+    ;-------------------------------------------
+    ; Si se mueve que se cambie la direccion bien
+    ;-------------------------------------------
+    ld a, [player_data + PLAYER_ISMOVING]
+    or a
+    jr nz, .reset_to_direction
+
+    ;-------------------------------------------
+    ; Si no mira hacia abajo
+    ;-------------------------------------------
+    ld a, [player_data + PLAYER_DIR]
+    cp 3
+    jr nz, .end_no_reset
+
+    ;-------------------------------------------
+    ; Si está quieto mirando hacia abajo 
+    ;-------------------------------------------
+    ld hl, wPlayerIdleTimer
+    inc [hl]
+    ld a, [hl]
+    cp 30
+    jr c, .end_no_reset
+
+    xor a
+    ld [hl], a
+
+    ; Alternar frame
+    ld a, [wPlayerIdleFrame]
+    xor 1
+    ld [wPlayerIdleFrame], a
+
+    ; Aplica frame correspondiente
+    ld a, [wPlayerIdleFrame]
+    or a
+    jr z, .frame_base
+
+    ; ---- FRAME 1: alterno (idle) ----
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $38
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $3A
+    jr .end_no_reset
+
+.frame_base:
+    ; ---- FRAME 0: base hacia abajo ----
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $30
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $32
+    jr .end_no_reset
+
+;-------------------------------------------
+; para resetear la dirección
+;-------------------------------------------
+.reset_to_direction:
+    xor a
+    ld [wPlayerIdleTimer], a
+    ld [wPlayerIdleFrame], a
+
+    ld a, [player_data + PLAYER_DIR]
+    cp 0
+    jr z, .right
+    cp 1
+    jr z, .left
+    cp 2
+    jr z, .up
+    cp 3
+    jr z, .down
+    jr .end_no_reset
+
+.right:
+    call Flip_sprite_right
+    jr .end_no_reset
+
+.left:
+    call Flip_sprite_left
+    jr .end_no_reset
+
+.up:
+    call Flip_sprite_up
+    jr .end_no_reset
+
+.down:
+    call Flip_sprite_down
+    jr .end_no_reset
+
+;-------------------------------------------
+.end_no_reset:
+    ret
 
 
 ; by the moment it does nothing because the player dies instantly 
