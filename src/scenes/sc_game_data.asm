@@ -60,7 +60,8 @@ Tiles_Init::
     MEMCPY Mr_floor_sprite_down, $8300, $40 
     MEMCPY Mr_floor_sprite_up, $8340, $40 
     ;DRAW HUD TILES
-    MEMCPY Hud, $87C0, $20 
+    MEMCPY Hud, $87C0, $60
+     
 
 ret
 

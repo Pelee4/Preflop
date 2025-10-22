@@ -81,17 +81,21 @@ HUD_Update::
 ; HUD_Show - Muestra el icono del bloque
 ; -----------------------------------------------------------------------------
 HUD_Show::
-    ; Y
-    ld a, HUD_SPR_Y
-    ld [OAM_HUD+0], a
-    ; X
-    ld a, HUD_SPR_X
-    ld [OAM_HUD+1], a
-    ; tile ya estaba puesto en init (o aquí si prefieres cambiarlo)
+    ; TOP
+    ld a,HUD_SPR_Y
+    ld [$FE10],a
+    ld a,HUD_SPR_X
+    ld [$FE11],a
+
+    ; BOTTOM
+    ld a,HUD_SPR_Y      
+    ld [$FE14],a
+    ld a,HUD_SPR_X+8
+    ld [$FE15],a
     ret
 
 HUD_Hide::
-    ; Método fácil: lo sacas fuera por Y=0
     xor a
-    ld [OAM_HUD+0], a
+    ld [$FE10],a  
+    ld [$FE14],a  
     ret

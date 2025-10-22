@@ -3,14 +3,14 @@
 ; Tile Source File.
 ;
 ; Info:
-;   Section              : Tiles
+;   Section              : HudTiles
 ;   Bank                 : 0
 ;   Form                 : All tiles as one unit.
 ;   Format               : Gameboy 4 color.
 ;   Compression          : None.
 ;   Counter              : None.
 ;   Tile size            : 8 x 8
-;   Tiles                : 0 to 3
+;   Tiles                : 0 to 5
 ;
 ;   Palette colors       : None.
 ;   SGB Palette          : None.
@@ -24,10 +24,14 @@
 
 ; Start of tile array.
 Hud::
-DB $FF,$FF,$81,$81,$81,$81,$81,$81
-DB $81,$81,$81,$81,$81,$81,$FF,$FF
-DB $FF,$FF,$99,$E7,$99,$E7,$FF,$81
-DB $FF,$81,$99,$E7,$99,$E7,$FF,$FF
+DB $FF,$00,$80,$7F,$BF,$40,$A7,$40
+DB $AF,$40,$BF,$40,$BE,$40,$BF,$40
+DB $B7,$40,$BF,$40,$BF,$40,$BF,$40
+DB $AF,$40,$9F,$40,$80,$7F,$FF,$00
+DB $FF,$00,$01,$FE,$FD,$02,$E5,$02
+DB $ED,$02,$FD,$02,$FD,$02,$F1,$02
+DB $F5,$02,$FD,$02,$BD,$02,$7D,$02
+DB $F5,$02,$FD,$02,$01,$FE,$FF,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00
 DB $00,$00,$00,$00,$00,$00,$00,$00

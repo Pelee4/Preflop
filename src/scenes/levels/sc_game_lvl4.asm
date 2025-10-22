@@ -71,16 +71,25 @@ sc_game_lvl4_init::
    MEMCPY sprite2_player_l4, $FE00 + 4, 4
  
    ; --- HUD sprite ---
-   ; define HUD en $FE00+16
-   ; por ahora ponlo fuera de pantalla (oculto)
-   ld a,0              ; Y = 0 --> oculto
-   ld [$FE00+16],a
-   ld a,160            ; X = da igual oculto
-   ld [$FE00+17],a
-   ld a,$7C            ; tile HUD (el tile del icono HUD, el existente en MEMCPY Hud)
-   ld [$FE00+18],a
-   ld a,%00000000      ; attr
-   ld [$FE00+19],a
+   ; --- HUD sprite TOP (FE10) - PARTE IZQUIERDA ---
+    ld a,0
+    ld [$FE10],a ; Y
+    ld a,160
+    ld [$FE11],a ; X
+    ld a,$7C     
+    ld [$FE12],a
+    ld a,%00000000
+    ld [$FE13],a
+
+    ; --- HUD sprite BOTTOM (FE14) - PARTE DERECHA ---
+    ld a,0
+    ld [$FE14],a ; Y 
+    ld a,160
+    ld [$FE15],a ; X 
+    ld a,$7E     
+    ld [$FE16],a
+    ld a,%00000000
+    ld [$FE17],a
 
 
 
