@@ -92,26 +92,6 @@ sc_game_lvl4_init::
     ld a,%00000000
     ld [$FE17],a
 
-
-
-
-
-   ; ENEMIES DATA
-   ld a, 48
-   ld [enemy_data + ENEMY_X], a
-   ld a, 24
-   ld [enemy_data + ENEMY_Y], a
-   ld a, DIR_LEFT
-   ld [enemy_data + ENEMY_DIR], a
-   ld a, 20
-   ld [enemy_data + ENEMY_SPRITEID], a
-
-   MEMCPY sprite1_enemy_l1, $FE00 + (20 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
-   MEMCPY sprite2_enemy_l1, $FE00 + (21 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
-
-
-   call init_entities
-
    ;===========================
    ; SCREEN ON
    ;===========================

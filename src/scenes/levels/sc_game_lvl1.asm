@@ -72,23 +72,6 @@ sc_game_lvl1_init::
    MEMCPY sprite1_player_l1, $FE00, SPRITE_BYTE_SIZE
    MEMCPY sprite2_player_l1, $FE00 + SPRITE_BYTE_SIZE, SPRITE_BYTE_SIZE
 
-
-
-    ; ENEMIES DATA
-    ld a, 80
-    ld [enemy_data + ENEMY_X], a
-    ld a, 40
-    ld [enemy_data + ENEMY_Y], a
-    ld a, DIR_LEFT
-    ld [enemy_data + ENEMY_DIR], a
-    ld a, 20
-    ld [enemy_data + ENEMY_SPRITEID], a
-   
-    MEMCPY sprite1_enemy_l1, $FE00 + (20 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
-    MEMCPY sprite2_enemy_l1, $FE00 + (21 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
-
-
-
  
     ;MAP DRAW
     MEMCPY_2 map1, $9800, 576
