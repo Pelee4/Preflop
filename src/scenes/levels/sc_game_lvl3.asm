@@ -18,6 +18,7 @@ sc_game_lvl3::
         call read_input_buttons
         call check_collision
         call HUD_Update 
+        call Player_Idle_Animate 
         jr loop_lvl3
     ret
 sc_game_lvl3_init::
