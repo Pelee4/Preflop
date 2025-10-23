@@ -264,9 +264,9 @@ Player_Idle_Animate::
     jr z, .right_base
     ; ---- FRAME alterno derecha ----
     ld hl, TILE_LEFT_SPRITE
-    ld [hl], $2C
+    ld [hl], $40
     ld hl, TILE_RIGHT_SPRITE
-    ld [hl], $2E
+    ld [hl], $42
     jp .end_no_reset
 .right_base:
     ld hl, TILE_LEFT_SPRITE
@@ -298,9 +298,9 @@ Player_Idle_Animate::
     jr z, .up_base
     ; ---- FRAME alterno arriba ----
     ld hl, TILE_LEFT_SPRITE
-    ld [hl], $3C
+    ld [hl], $44
     ld hl, TILE_RIGHT_SPRITE
-    ld [hl], $3E
+    ld [hl], $46
     jp .end_no_reset
 .up_base:
     ld hl, TILE_LEFT_SPRITE
