@@ -102,7 +102,7 @@ sc_game_lvl2_init::
    ;ld a, 40
    ;ld [enemy_data + ENEMY_Y], a
    
-
+   MEMSET ENEMIES_START_DATA, 0, 80
 
 
    ;===========================

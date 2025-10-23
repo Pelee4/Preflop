@@ -109,13 +109,26 @@ ret
 ;CHECKS IF ITS COLLIDING WITH THE PLAYER TO KILL HIM
 checks_hitting_player::
 ;get position
-
+    call get_tilemap_pos_enemy
+    ld d, h
+    ld e, l
 ;get player position
-
+    push de
+    call get_tilemap_pos_player
+    pop de
 ;cp
-
+    ld a, e
+    cp l
+    jr z, check_high
+    ret
+    check_high:
+        ld a,d
+        cp h
+        jr z, die
+    ret
 ;if its the same -> call take_damage
-
+    die:
+        jp sc_game_death
 ret
 
 
@@ -124,14 +137,40 @@ ret
 
 ; ahora mismo no lo pone en la posicion ni puta idea de por que
 enemy_update_sprite::
-    ld a, [enemy_data + ENEMY_Y]
-    ld [$FE00 + 20 * SPRITE_BYTE_SIZE], a
-    ld [$FE00 + 21 * SPRITE_BYTE_SIZE], a
+    ;;aumentamos el sprite de la oam
+    ld a, [enemy_data + ENEMY_NUMBER]
+    ld h, $FE
+    ld l, a
 
+    ld a, [enemy_data + ENEMY_Y]
+    ld [hl+], a
     ld a, [enemy_data + ENEMY_X]
-    ld [$FE00 + 1 + (20 * SPRITE_BYTE_SIZE)], a
+    ld [hl+], a
+    inc hl
+    inc hl
+    ld a, [enemy_data + ENEMY_Y]
+    ld [hl+], a
+    ld a, [enemy_data + ENEMY_X]
     add 8
-    ld [$FE00 + 1 + (21 * SPRITE_BYTE_SIZE)], a
+    ld [hl], a
+
+    ;;Aumentamos en la data e sprite
+    ld a, [enemy_data + ENEMY_NUMBER]
+    ld h, $C4
+    ld l, a
+
+    ld a, [enemy_data + ENEMY_Y]
+    ld [hl+], a
+    ld a, [enemy_data + ENEMY_X]
+    ld [hl+], a
+    inc hl
+    inc hl
+    ld a, [enemy_data + ENEMY_Y]
+    ld [hl+], a
+    ld a, [enemy_data + ENEMY_X]
+    add 8
+    ld [hl], a
+
 ret
 
 
@@ -152,6 +191,10 @@ move_left_enemy:
     ld a, [enemy_data + ENEMY_X]
     sub 16
     ld [enemy_data + ENEMY_X], a
+
+    ld a, [enemy_data + ENEMY_NUMBER]
+    ld h, $C4
+    ld l, a
 ret
 
 move_up_enemy:
@@ -176,30 +219,54 @@ change_dir_and_move_rl:
 
     ld a, 1
     ld [enemy_data + ENEMY_DIR], a
-    call move_left_enemy
 
+    ld a, [enemy_data + ENEMY_NUMBER]
+    add 3
+    ld h, $C4
+    ld l, a
+
+    ld a, 1
+    ld [hl], a
 ret
 
 change_dir_and_move_lr:
 
     ld a, 0
     ld [enemy_data + ENEMY_DIR], a
-    call move_right_enemy
 
+    ld a, [enemy_data + ENEMY_NUMBER]
+    add 3
+    ld h, $C4
+    ld l, a
+
+    ld a, 0
+    ld [hl], a
 ret
 
 change_dir_and_move_ud:
 
     ld a, 3
     ld [enemy_data + ENEMY_DIR], a
-    call move_down_enemy
 
+    ld a, [enemy_data + ENEMY_NUMBER]
+    add 3
+    ld h, $C4
+    ld l, a
+
+    ld a, 3
+    ld [hl], a
 ret
 
 change_dir_and_move_du:
 
     ld a, 2
     ld [enemy_data + ENEMY_DIR], a
-    call move_up_enemy
 
+    ld a, [enemy_data + ENEMY_NUMBER]
+    add 3
+    ld h, $C4
+    ld l, a
+
+    ld a, 2
+    ld [hl], a
 ret

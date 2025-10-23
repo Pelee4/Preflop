@@ -156,6 +156,7 @@ update_sprite::
    ld [$FE00 + 1], a
    add 8
    ld [$FE00 + 5], a
+
 ret
 
 ;;To flip sprite to right

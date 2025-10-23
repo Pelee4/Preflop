@@ -129,11 +129,20 @@ sprite2_player_l4:  DB 48, 32, $2A, %00000000
 
 
 ;;                      y  x  tile      Att
-sprite1_player_l5:  DB 80, 8, $28, %00000000
-sprite2_player_l5:  DB 80, 16, $2A, %00000000
+sprite1_player_l5:  DB 80, 24, $28, %00000000
+sprite2_player_l5:  DB 80, 32, $2A, %00000000
 
 sprite1_enemy1_l5:  DB  48, 56, $20, %00000000   
 sprite2_enemy1_l5:  DB  48, 64, $22, %00000000
+
+enemy1_5_stats:
+DB 48, 56, 80, DIR_DOWN
+
+sprite1_enemy2_l5:  DB  80, 88, $20, %00000000   
+sprite2_enemy2_l5:  DB  80, 96, $22, %00000000
+
+enemy2_5_stats:
+DB 80, 88, 88, DIR_UP
 
 
 ; #############################################################

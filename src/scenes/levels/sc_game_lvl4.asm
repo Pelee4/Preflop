@@ -92,6 +92,8 @@ sc_game_lvl4_init::
     ld a,%00000000
     ld [$FE17],a
 
+    MEMSET ENEMIES_START_DATA, 0, 80
+
    ;===========================
    ; SCREEN ON
    ;===========================

@@ -51,7 +51,7 @@ sc_game_lvl5_init::
    ;;INITIALIZE PLAYER_DATA ON 0
    ld a, 80
    ld [player_data + PLAYER_Y], a
-   ld a, 8
+   ld a, 24
    ld [player_data + PLAYER_X], a
    ld a, 0
    ld [player_data + PLAYER_ISMOVING], a
@@ -93,22 +93,16 @@ sc_game_lvl5_init::
 
 
 
+    MEMSET ENEMIES_START_DATA, 0, 80
 
+    MEMCPY sprite1_enemy1_l5, $FE00 + (20 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+    MEMCPY sprite2_enemy1_l5, $FE00 + (21 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
 
-   ; ENEMIES DATA
-   ld a, 56
-   ld [enemy_data + ENEMY_X], a
-   ld a, 48
-   ld [enemy_data + ENEMY_Y], a
-   ld a, DIR_DOWN
-   ld [enemy_data + ENEMY_DIR], a
-   ld a, 20
-   ld [enemy_data + ENEMY_SPRITEID], a
+    MEMCPY sprite1_enemy2_l5, $FE00 + (22 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+    MEMCPY sprite2_enemy2_l5, $FE00 + (23 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
 
-   MEMCPY sprite1_enemy1_l5, $FE00 + (20 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
-   MEMCPY sprite2_enemy1_l5, $FE00 + (21 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
-
-
+   MEMCPY enemy1_5_stats, ENEMIES_START_DATA, 4
+   MEMCPY enemy2_5_stats, ENEMIES_START_DATA + 8, 4
    ;===========================
    ; SCREEN ON
    ;===========================

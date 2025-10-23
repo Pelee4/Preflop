@@ -96,6 +96,8 @@ sc_game_lvl3_init::
     ld a,%00000000
     ld [$FE17],a
 
+    MEMSET ENEMIES_START_DATA, 0, 80
+
 
     ;; ENEMIES INITIAL POSITION
    ;ld a, 80
