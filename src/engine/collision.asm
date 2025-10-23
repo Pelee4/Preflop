@@ -73,6 +73,7 @@ check_collision::
    call check_stairs
    ; checks if the player face a solid block -> returns player_x & player_y to its previous position
    ;call check_solid
+   call checks_hitting_player
 
 ret
 
