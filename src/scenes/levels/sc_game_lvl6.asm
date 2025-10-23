@@ -8,19 +8,19 @@ include "src/engine/enemies/enemy1_data.inc"
 
 
 
-SECTION "Lvl5 scene", ROM0
+SECTION "Lvl6 scene", ROM0
 
-sc_game_lvl5::
-    call sc_game_lvl5_init
-    loop_lvl5:
+sc_game_lvl6::
+    call sc_game_lvl6_init
+    loop_lvl6:
         call wait_vblank_start   ; <<-- sincroniza AL INICIO de frame
         call read_input
         call read_input_buttons
         call check_collision
         call HUD_Update 
-        jr loop_lvl5
+        jr loop_lvl6
     ret
-sc_game_lvl5_init::
+sc_game_lvl6_init::
    ;===========================
    ;; SCREEN OFF
    ;===========================
@@ -30,7 +30,7 @@ sc_game_lvl5_init::
 
    
    ;MAP DRAW
-   MEMCPY_2 map5, $9800, 576
+   MEMCPY_2 map6, $9800, 576
 
    ;;PALETTES
    ld hl, rBGP
@@ -49,9 +49,9 @@ sc_game_lvl5_init::
    MEMSET $FE00, 0, 160
 
    ;;INITIALIZE PLAYER_DATA ON 0
-   ld a, 80
+   ld a, 128
    ld [player_data + PLAYER_Y], a
-   ld a, 24
+   ld a, 136
    ld [player_data + PLAYER_X], a
    ld a, 0
    ld [player_data + PLAYER_ISMOVING], a
@@ -61,14 +61,14 @@ sc_game_lvl5_init::
    ld [player_data + PLAYER_TIMER], a
    ld a, 0
    ld [player_data + PLAYER_INT_BOOL], a
-   ld a, 5
+   ld a, 6
    ld [player_data + PLAYER_LEVEL], a
 
 
    ; WRITES SPRITES ON SCREEN
    ; - PLAYER
-   MEMCPY sprite1_player_l5, $FE00, 4
-   MEMCPY sprite2_player_l5, $FE00 + 4, 4
+   MEMCPY sprite1_player_l6, $FE00, 4
+   MEMCPY sprite2_player_l6, $FE00 + 4, 4
  
    ; --- HUD sprite ---
    ; --- HUD sprite TOP (FE10) - PARTE IZQUIERDA ---
@@ -95,10 +95,14 @@ sc_game_lvl5_init::
 
     MEMSET ENEMIES_START_DATA, 0, 80
 
-    MEMCPY sprite1_enemy1_l5, $FE00 + (20 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
-    MEMCPY sprite2_enemy1_l5, $FE00 + (21 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+    MEMCPY sprite1_enemy1_l6, $FE00 + (20 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+    MEMCPY sprite2_enemy1_l6, $FE00 + (21 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
 
-   MEMCPY enemy1_5_stats, ENEMIES_START_DATA, 4
+    MEMCPY sprite1_enemy2_l6, $FE00 + (22 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+    MEMCPY sprite2_enemy2_l6, $FE00 + (23 * SPRITE_BYTE_SIZE), SPRITE_BYTE_SIZE
+
+   MEMCPY enemy1_6_stats, ENEMIES_START_DATA, 4
+   MEMCPY enemy2_6_stats, ENEMIES_START_DATA + 8, 4
    ;===========================
    ; SCREEN ON
    ;===========================

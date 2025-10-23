@@ -30,6 +30,8 @@ change_level_manager::
     jr z, open_lvl4
     cp 5
     jr z, open_lvl5
+    cp 6
+    jr z, open_lvl6
 ret
 
 
@@ -46,3 +48,6 @@ open_lvl4:
 
 open_lvl5:
     call sc_game_lvl5
+
+open_lvl6:
+    call sc_game_lvl6
