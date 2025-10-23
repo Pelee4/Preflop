@@ -73,6 +73,12 @@ check_collision::
    call check_stairs
    ; checks if the player face a solid block -> returns player_x & player_y to its previous position
    ;call check_solid
+
+   ;;comprueba si hay enemigos en el nivel. Si no hay, no checkea
+   ld hl, $FE50
+   ld a, [hl]
+   cp 0
+   ret z
    call checks_hitting_player
 
 ret

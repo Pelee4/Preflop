@@ -18,7 +18,7 @@ sc_game_death::
     jr nz, .loop
 
     
-    jp sc_game_lvl1
+    call change_level_manager
     
     
 
