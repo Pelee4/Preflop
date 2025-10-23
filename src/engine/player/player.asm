@@ -30,6 +30,7 @@ SECTION "Player functions", ROM0
 
 
    start_move_right:
+      PLAY_SFX SFX_MOVE
       call move_entities
       call get_tilemap_pos_player ;now hl = player_pos 
       ld a, 0
@@ -38,6 +39,7 @@ SECTION "Player functions", ROM0
       ret
 
    start_move_left:
+      PLAY_SFX SFX_MOVE
       call move_entities
       call get_tilemap_pos_player
       ld a, 1
@@ -46,6 +48,7 @@ SECTION "Player functions", ROM0
       ret
 
    start_move_up:
+      PLAY_SFX SFX_MOVE
       call move_entities
       call get_tilemap_pos_player
       ld a, 2
@@ -54,6 +57,7 @@ SECTION "Player functions", ROM0
       ret
 
    start_move_down:
+      PLAY_SFX SFX_MOVE
       call move_entities
       call get_tilemap_pos_player
       ld a, 3

@@ -21,3 +21,13 @@ MACRO MEMCPY_2
    ld bc, \3
    call memcpy
 ENDM
+
+
+;------------------------------------------------------------------------------
+; Macro para reproducir sonidos fácilmente (PLAY_SFX {id_sound})
+; BREAKS A !!!
+;------------------------------------------------------------------------------
+MACRO PLAY_SFX
+    ld a, \1
+    call play_sound
+ENDM
