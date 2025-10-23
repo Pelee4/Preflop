@@ -11,6 +11,16 @@ DB $10, $12, $08, $08, $0B, $0D, $11, $17, $19, $16, $08, $0F, $05, $07, $0F, $0
 DB $00, $00, $00, $00, $F0, $F0, $08, $F8, $08, $78, $08, $78, $08, $38, $08, $08
 DB $08, $38, $F0, $30, $88, $78, $08, $C8, $38, $C8, $10, $F0, $D0, $F0, $F0, $90
 
+Mr_floor_sprite_left_idle:
+DB $00,$00,$00,$00,$0F,$0F,$10,$1F
+DB $10,$1F,$10,$10,$10,$10,$14,$19
+DB $14,$10,$10,$12,$08,$08,$09,$0F
+DB $11,$16,$18,$17,$0D,$0F,$0F,$09
+DB $00,$00,$00,$00,$00,$00,$F0,$F0
+DB $08,$F8,$08,$78,$08,$78,$08,$38
+DB $08,$08,$08,$38,$F8,$38,$30,$F0
+DB $08,$C8,$38,$C8,$D0,$D0,$F0,$90
+
 Mr_floor_sprite_flip:
 DB $00, $00, $00, $00, $0F, $0F, $10, $1F, $10, $1E, $10, $1E, $10, $1C, $10, $10
 DB $10, $1C, $0F, $0C, $11, $1E, $10, $13, $1C, $13, $08, $0F, $0B, $0F, $0F, $09
@@ -69,7 +79,8 @@ Tiles_Init::
     MEMCPY Mr_floor_sprite_flip, $82C0, $40     ;2C 2D 2E 2F
     MEMCPY Mr_floor_sprite_down, $8300, $40 
     MEMCPY Mr_floor_sprite_up, $8340, $40
-    MEMCPY Mr_floor_sprite_down_idle, $8380, $40   ; Nuevo frame idle 
+    MEMCPY Mr_floor_sprite_down_idle, $8380, $40
+    MEMCPY Mr_floor_sprite_left_idle, $83C0, $40   
     ;DRAW HUD TILES
     MEMCPY Hud, $87C0, $60
      

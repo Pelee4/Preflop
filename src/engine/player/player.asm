@@ -212,62 +212,122 @@ Flip_sprite_up:
 ret
 
 ;==============================================
-; IDLE ANIMATION (solo cuando mira hacia abajo)
+; IDLE ANIMATION (todas direcciones, con JP)
 ;==============================================
 Player_Idle_Animate::
     ;-------------------------------------------
-    ; Si se mueve que se cambie la direccion bien
+    ; Si el jugador se está moviendo, resetear idle
     ;-------------------------------------------
     ld a, [player_data + PLAYER_ISMOVING]
     or a
-    jr nz, .reset_to_direction
+    jP nz, .reset_to_direction
 
     ;-------------------------------------------
-    ; Si no mira hacia abajo
-    ;-------------------------------------------
-    ld a, [player_data + PLAYER_DIR]
-    cp 3
-    jr nz, .end_no_reset
-
-    ;-------------------------------------------
-    ; Si está quieto mirando hacia abajo 
+    ; Incrementar el contador idle
     ;-------------------------------------------
     ld hl, wPlayerIdleTimer
     inc [hl]
     ld a, [hl]
     cp 30
-    jr c, .end_no_reset
+    jP c, .end_no_reset
 
+    ;-------------------------------------------
+    ; Alternar frame cuando se cumple el tiempo
+    ;-------------------------------------------
     xor a
     ld [hl], a
-
-    ; Alternar frame
     ld a, [wPlayerIdleFrame]
     xor 1
     ld [wPlayerIdleFrame], a
 
-    ; Aplica frame correspondiente
+    ;-------------------------------------------
+    ; Aplicar frame según dirección actual
+    ;-------------------------------------------
+    ld a, [player_data + PLAYER_DIR]
+    cp 0
+    jp z, .idle_right
+    cp 1
+    jp z, .idle_left
+    cp 2
+    jp z, .idle_up
+    cp 3
+    jp z, .idle_down
+    jp .end_no_reset
+
+;-------------------------------------------
+; IDLE animaciones por dirección
+;-------------------------------------------
+
+.idle_right:
     ld a, [wPlayerIdleFrame]
     or a
-    jr z, .frame_base
+    jr z, .right_base
+    ; ---- FRAME alterno derecha ----
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $2C
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $2E
+    jp .end_no_reset
+.right_base:
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $2C
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $2E
+    jp .end_no_reset
 
-    ; ---- FRAME 1: alterno (idle) ----
+.idle_left:
+    ld a, [wPlayerIdleFrame]
+    or a
+    jr z, .left_base
+    ; ---- FRAME alterno izquierda ----
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $3C
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $3E
+    jp .end_no_reset
+.left_base:
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $28
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $2A
+    jp .end_no_reset
+
+.idle_up:
+    ld a, [wPlayerIdleFrame]
+    or a
+    jr z, .up_base
+    ; ---- FRAME alterno arriba ----
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $3C
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $3E
+    jp .end_no_reset
+.up_base:
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $34
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $36
+    jp .end_no_reset
+
+.idle_down:
+    ld a, [wPlayerIdleFrame]
+    or a
+    jr z, .down_base
+    ; ---- FRAME alterno abajo ----
     ld hl, TILE_LEFT_SPRITE
     ld [hl], $38
     ld hl, TILE_RIGHT_SPRITE
     ld [hl], $3A
-    jr .end_no_reset
-
-.frame_base:
-    ; ---- FRAME 0: base hacia abajo ----
+    jp .end_no_reset
+.down_base:
     ld hl, TILE_LEFT_SPRITE
     ld [hl], $30
     ld hl, TILE_RIGHT_SPRITE
     ld [hl], $32
-    jr .end_no_reset
+    jp .end_no_reset
 
 ;-------------------------------------------
-; para resetear la dirección
+; Reset al moverse
 ;-------------------------------------------
 .reset_to_direction:
     xor a
@@ -276,41 +336,33 @@ Player_Idle_Animate::
 
     ld a, [player_data + PLAYER_DIR]
     cp 0
-    jr z, .right
+    jp z, .right
     cp 1
-    jr z, .left
+    jp z, .left
     cp 2
-    jr z, .up
+    jp z, .up
     cp 3
-    jr z, .down
-    jr .end_no_reset
+    jp z, .down
+    jp .end_no_reset
 
 .right:
     call Flip_sprite_right
-    jr .end_no_reset
+    jp .end_no_reset
 
 .left:
     call Flip_sprite_left
-    jr .end_no_reset
+    jp .end_no_reset
 
 .up:
     call Flip_sprite_up
-    jr .end_no_reset
+    jp .end_no_reset
 
 .down:
     call Flip_sprite_down
-    jr .end_no_reset
+    jp .end_no_reset
 
-;-------------------------------------------
 .end_no_reset:
     ret
-
-
-; by the moment it does nothing because the player dies instantly 
-; but it is a good practice to have it created just in case
-take_damage::
-    call on_player_death
-ret
 
 on_player_death::
    ;; Reposiciona al jugador en su punto del principio
