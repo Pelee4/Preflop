@@ -223,6 +223,21 @@ change_dir_and_move_rl:
 
     ld a, 1
     ld [hl], a
+
+    ld a, [enemy_data + ENEMY_NUMBER]
+    add 2
+    ld h, $FE
+    ld l, a
+    ld a, $58
+    ld [hl], a
+    
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+
+    ld a, $5A
+    ld [hl], a
 ret
 
 change_dir_and_move_lr:
@@ -236,6 +251,21 @@ change_dir_and_move_lr:
     ld l, a
 
     ld a, 0
+    ld [hl], a
+
+    ld a, [enemy_data + ENEMY_NUMBER]
+    add 2
+    ld h, $FE
+    ld l, a
+    ld a, $54
+    ld [hl], a
+
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+
+    ld a, $56
     ld [hl], a
 ret
 
@@ -251,6 +281,21 @@ change_dir_and_move_ud:
 
     ld a, 3
     ld [hl], a
+
+    ld a, [enemy_data + ENEMY_NUMBER]
+    add 2
+    ld h, $FE
+    ld l, a
+    ld a, $20
+    ld [hl], a
+
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+
+    ld a, $22
+    ld [hl], a
 ret
 
 change_dir_and_move_du:
@@ -264,5 +309,20 @@ change_dir_and_move_du:
     ld l, a
 
     ld a, 2
+    ld [hl], a
+
+    ld a, [enemy_data + ENEMY_NUMBER]
+    add 2
+    ld h, $FE
+    ld l, a
+    ld a, $50
+    ld [hl], a
+
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+
+    ld a, $52
     ld [hl], a
 ret

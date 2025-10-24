@@ -125,6 +125,9 @@ Tiles_Init::
 	;DRAW PLAYER AND ENEMIES
     MEMCPY Mr_floor_sprite, $8280, $40          ;28 29 2A 2B
     MEMCPY Enemy_Sprite, $8200, $40             ;20 21 22 23
+    MEMCPY Ghost_Flipped, $8500, $40            ;50 51 52 53
+    MEMCPY Skull_Right, $8540, $40              ;54 55 56 57
+    MEMCPY Skull_Left, $8580, $40               ;58 59 5A 5B
     MEMCPY Mr_floor_sprite_flip, $82C0, $40     ;2C 2D 2E 2F
     MEMCPY Mr_floor_sprite_down, $8300, $40 
     MEMCPY Mr_floor_sprite_up, $8340, $40
