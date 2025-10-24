@@ -108,13 +108,16 @@ ret
 
 ;CHECKS IF ITS COLLIDING WITH THE PLAYER TO KILL HIM
 checks_hitting_player::
+
+
+
 ;get position
-    call get_tilemap_pos_enemy
+    call get_tilemap_pos_player
     ld d, h
     ld e, l
 ;get player position
     push de
-    call get_tilemap_pos_player
+    call get_tilemap_pos_enemy
     pop de
 ;cp
     ld a, e
@@ -163,13 +166,6 @@ enemy_update_sprite::
     ld [hl+], a
     ld a, [enemy_data + ENEMY_X]
     ld [hl+], a
-    inc hl
-    inc hl
-    ld a, [enemy_data + ENEMY_Y]
-    ld [hl+], a
-    ld a, [enemy_data + ENEMY_X]
-    add 8
-    ld [hl], a
 
 ret
 

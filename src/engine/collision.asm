@@ -79,7 +79,7 @@ check_collision::
    ld a, [hl]
    cp 0
    ret z
-   call checks_hitting_player
+   call check_dead_enemies
 
 ret
 
