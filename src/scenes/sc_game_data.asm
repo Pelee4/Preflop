@@ -224,7 +224,45 @@ sprite2_enemy2_l6:  DB  96, 112, $22, %00000000
 enemy2_6_stats:
 DB 96, 104, 88, DIR_UP
 
+; ###############################################################################
+;; LVL7
+; ###############################################################################
 
+
+;;                      y  x  tile      Att
+sprite1_player_l7:  DB 64, 152, $28, %00000000
+sprite2_player_l7:  DB 64, 160, $2A, %00000000
+
+
+sprite1_enemy1_l7:  DB  64, 136, $50, %00000000   
+sprite2_enemy1_l7:  DB  64, 144, $52, %00000000
+
+enemy1_7_stats:
+DB 64, 136, 80, DIR_UP
+
+sprite1_enemy2_l7:  DB  112, 40, $54, %00000000   
+sprite2_enemy2_l7:  DB  112, 48, $56, %00000000
+
+enemy2_7_stats:
+DB 112, 40, 88, DIR_RIGHT
+
+sprite1_enemy3_l7:  DB  64, 24, $54, %00000000   
+sprite2_enemy3_l7:  DB  64, 32, $56, %00000000
+
+enemy3_7_stats:
+DB 64, 24, 96, DIR_RIGHT
+
+;sprite1_enemy4_l7:  DB  16, 72, $20, %00000000   
+;sprite2_enemy4_l7:  DB  16, 80, $22, %00000000
+
+;enemy4_7_stats:
+;DB 16, 72, 104, DIR_DOWN
+
+;sprite1_enemy5_l7:  DB  8, 104, $20, %00000000   
+;sprite2_enemy5_l7:  DB  8, 112, $22, %00000000
+
+;enemy5_7_stats:
+;DB 8, 104, 112, DIR_DOWN
 
 ; #############################################################
 ; VARIABLES DEL EFECTO DE ONDA HORIZONTAL (X SINE)

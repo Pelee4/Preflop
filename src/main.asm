@@ -4,7 +4,7 @@ SECTION "Entry point", ROM0[$150]
 main::
    call sc_game_start
    call init_sound
-   call sc_game_lvl5
+   call sc_game_lvl7
    di
    halt
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
