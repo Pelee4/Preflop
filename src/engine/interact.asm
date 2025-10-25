@@ -171,4 +171,64 @@ put_empty:
     ld [hl], $18
     ld a, 1
     ld [player_data + PLAYER_INT_BOOL], a
+    call animate_pickup
 ret
+
+; =======================================================
+; animate_pickup - animación al coger un bloque (más lenta)
+; =======================================================
+
+animate_pickup:
+    call wait_vblank_start
+
+    ; si mira arriba no animar por ahora
+    ld a, [player_data + PLAYER_DIR]
+    cp 2
+    ret z
+
+    ; Primer frame
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $48
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $4A
+    call update_sprite
+
+    call Delay_PickupAnim   
+
+    ; Segundo frame
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $4C
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $4E
+    call update_sprite
+
+    call Delay_PickupAnim   
+
+    ; --- restaurar sprite normal según dirección ---
+    ld a, [player_data + PLAYER_DIR]
+    cp 0
+    jr z, .restore_right
+    cp 1
+    jr z, .restore_left
+    cp 3
+    jr z, .restore_down
+    ret
+
+.restore_right:
+    call Flip_sprite_right
+    ret
+.restore_left:
+    call Flip_sprite_left
+    ret
+.restore_down:
+    call Flip_sprite_down
+    ret
+
+
+Delay_PickupAnim:
+    ld b, 28          ;; esto es cuanto delay hay, mayor=mas delay
+.wait_loop:
+    call wait_vblank_start
+    dec b
+    jr nz, .wait_loop
+    ret
