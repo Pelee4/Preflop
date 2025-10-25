@@ -178,57 +178,85 @@ ret
 ; animate_pickup - animación al coger un bloque (más lenta)
 ; =======================================================
 
+; =======================================================
+; animate_pickup - animación al coger un bloque (más lenta)
+; incluye versión "flipped" si mira hacia arriba
+; =======================================================
+
 animate_pickup:
     call wait_vblank_start
 
-    ; si mira arriba no animar por ahora
+    
     ld a, [player_data + PLAYER_DIR]
     cp 2
-    ret z
+    jr z, .anim_up  ; si mira hacia arriba que haga su animacion propia
 
-    ; Primer frame
+    ; animación normal (no mira arriba)
+
+    ; Primer frame (Mr_floor_animated2)
     ld hl, TILE_LEFT_SPRITE
     ld [hl], $48
     ld hl, TILE_RIGHT_SPRITE
     ld [hl], $4A
     call update_sprite
-
     call Delay_PickupAnim   
 
-    ; Segundo frame
+    ; Segundo frame (Mr_floor_animated3)
     ld hl, TILE_LEFT_SPRITE
     ld [hl], $4C
     ld hl, TILE_RIGHT_SPRITE
     ld [hl], $4E
     call update_sprite
-
     call Delay_PickupAnim   
 
-    ; --- restaurar sprite normal según dirección ---
+    ; Restaurar sprite normal según dirección
     ld a, [player_data + PLAYER_DIR]
     cp 0
-    jr z, .restore_right
+    jr z, restore_right
     cp 1
-    jr z, .restore_left
+    jr z, restore_left
     cp 3
-    jr z, .restore_down
+    jr z, restore_down
     ret
 
-.restore_right:
-    call Flip_sprite_right
+; animación especial al mirar ARRIBA
+.anim_up:
+    ; Primer frame flipped (Mr_floor_animated2_flipped)
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $5C
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $5E
+    call update_sprite
+    call Delay_PickupAnim   
+
+    ; Segundo frame flipped (Mr_floor_animated3_flipped)
+    ld hl, TILE_LEFT_SPRITE
+    ld [hl], $60
+    ld hl, TILE_RIGHT_SPRITE
+    ld [hl], $62
+    call update_sprite
+    call Delay_PickupAnim   
+
+    ; Restaurar sprite hacia arriba
+    call Flip_sprite_up
     ret
-.restore_left:
-    call Flip_sprite_left
-    ret
-.restore_down:
-    call Flip_sprite_down
-    ret
+
 
 
 Delay_PickupAnim:
-    ld b, 28          ;; esto es cuanto delay hay, mayor=mas delay
+    ld b, 28          ;; mayor = más lenta la animación
 .wait_loop:
     call wait_vblank_start
     dec b
     jr nz, .wait_loop
+    ret
+
+restore_right:
+    call Flip_sprite_right
+    ret
+restore_left:
+    call Flip_sprite_left
+    ret
+restore_down:
+    call Flip_sprite_down
     ret
