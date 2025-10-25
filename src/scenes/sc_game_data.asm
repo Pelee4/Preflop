@@ -43,6 +43,26 @@ DB $10,$1A,$09,$08,$0A,$0C,$11,$1F,$19,$17,$11,$16,$08,$0F,$07,$05
 DB $00,$00,$00,$00,$E0,$E0,$10,$F0,$08,$F8,$08,$38,$08,$18,$48,$08
 DB $08,$58,$90,$10,$50,$30,$88,$F8,$98,$E8,$88,$68,$10,$F0,$E0,$A0
 
+Mr_floor_animated2:
+DB $00,$00,$07,$00,$0F,$07,$0F,$08
+DB $10,$1F,$10,$1C,$10,$18,$12,$10
+DB $10,$1A,$09,$08,$72,$7C,$51,$4F
+DB $31,$3F,$09,$0E,$08,$0F,$07,$05
+DB $00,$00,$E0,$00,$F0,$E0,$F0,$10
+DB $08,$F8,$08,$38,$08,$18,$48,$08
+DB $08,$58,$90,$10,$4E,$3E,$8A,$F2
+DB $8C,$FC,$90,$70,$10,$F0,$E0,$A0
+
+Mr_floor_animated3:
+DB $00,$00,$47,$00,$6F,$07,$0F,$08
+DB $10,$1F,$90,$1C,$50,$18,$92,$10
+DB $70,$7A,$59,$58,$72,$4C,$31,$3F
+DB $11,$1F,$29,$0E,$48,$0F,$07,$05
+DB $00,$00,$E2,$00,$F6,$E0,$F0,$10
+DB $08,$F8,$09,$38,$0A,$18,$49,$08
+DB $0E,$5E,$9A,$1A,$4E,$32,$8C,$FC
+DB $88,$F8,$94,$70,$12,$F0,$E0,$A0
+
 Mr_floor_sprite_down_idle:
 DB $00,$00,$00,$00,$00,$00,$07,$07
 DB $08,$0F,$10,$1F,$10,$1C,$10,$18
@@ -134,7 +154,12 @@ Tiles_Init::
     MEMCPY Mr_floor_sprite_down_idle, $8380, $40
     MEMCPY Mr_floor_sprite_left_idle, $83C0, $40
     MEMCPY Mr_floor_sprite_flip_idle, $8400, $40
-    MEMCPY Mr_floor_sprite_up_idle, $8440, $40   
+    MEMCPY Mr_floor_sprite_up_idle, $8440, $40 
+
+    ;ANIMATION TILES
+    MEMCPY Mr_floor_animated2, $8480, $40
+    MEMCPY Mr_floor_animated3, $84C0, $40
+
     ;DRAW HUD TILES
     MEMCPY Hud, $87C0, $60
      
