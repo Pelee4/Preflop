@@ -12,7 +12,7 @@ estadoBotones:    ds 1     ; Último estado de los botones (A, B, Start, Select)
 flancoBotones:    ds 1     ; Flancos ascendentes de los botones
 
 
-SECTION "Inputs", ROM0
+SECTION "Inputs", ROMX
 
 read_input::
     ld a, [player_data + PLAYER_ISMOVING]

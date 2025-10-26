@@ -4,7 +4,7 @@
 include "includes/constants.inc"
 include "includes/macros.inc"
 
-SECTION "Death scene", ROM0
+SECTION "Death scene", ROMX
 
 sc_game_death::
     call sc_game_death_init

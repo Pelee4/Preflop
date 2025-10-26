@@ -6,7 +6,7 @@ include "includes/macros.inc"
 include "src/engine/player/player_data.inc"
 include "src/engine/enemies/enemy1_data.inc"
 
-SECTION "Collisions_logic", ROM0
+SECTION "Collisions_logic", ROMX
 
 ;;Convierte la posicion del sprite a posicion de tile map y la guarda en hl
 get_tilemap_pos_player:

@@ -13,7 +13,7 @@ include "src/engine/player/player_data.inc"
 
 
 
-SECTION "Level_manager_stuff", ROM0
+SECTION "Level_manager_stuff", ROMX
 
 get_player_level:
     ld a, [player_data + PLAYER_LEVEL]

@@ -194,7 +194,7 @@ ret
 
 
 
-SECTION "Sprites definition", ROM0
+SECTION "Sprites definition", ROMX
 
 
 ; ###############################################################################

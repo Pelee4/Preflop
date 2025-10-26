@@ -4,6 +4,8 @@ SECTION "Entry point", ROM0[$150]
 main::
    call sc_game_start
    call init_sound
+   ;ld hl, menu_theme
+   ;call hUGE_init
    call sc_game_lvl7
    di
    halt

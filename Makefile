@@ -22,7 +22,7 @@ include cfg/projectpaths.mk   # Local paths and files for the project
 ## Project general configuration
 PRJNAME  :=game
 PAD      :=0xFF
-INCLUDE  :=-Isrc
+INCLUDE  :=-Isrc -Isrc/hUGEDriver-master/include
 ASMFLAGS :=-E -Weverything
 FIXFLAGS :=-v
 TARGET   :=$(PRJNAME).gb

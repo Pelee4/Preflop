@@ -10,7 +10,7 @@ DEF sprite_components_size = sprite_components_end - sprite_components
 
 alive_entitites: DS 1 ;;to know hoy many entities are alive
 
-SECTION "Entity Manager Code", ROM0
+SECTION "Entity Manager Code", ROMX
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Initialize Entity Manager

@@ -1,6 +1,6 @@
 include "src/engine/enemies/enemy1_data.inc"
 
-SECTION "Enemy manager", ROM0
+SECTION "Enemy manager", ROMX
 
 ; OBTIENE CADA SPRITE ENEMIGO Y LLAMA A SU FUNCION enemy_moves_once
 
