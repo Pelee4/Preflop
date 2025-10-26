@@ -17,11 +17,11 @@ sc_game_start::
 
     ;; Botón A pulsado → detener efecto antes de salir
 
-    ; di
-    ; xor a
-    ; ld [wSineActive], a
-    ; call StopWaveEffect
-    ; ei
+    di
+    xor a
+    ld [wSineActive], a
+    call StopWaveEffect
+    ei
 
     call StopMusic
     xor a 
