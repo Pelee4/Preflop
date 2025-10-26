@@ -203,8 +203,8 @@ SECTION "Sprites definition", ROMX
 
 
 ;;             			y  x  tile  	Att         
-sprite1_player_l1:  DB 80, 48, $28, %00000000
-sprite2_player_l1:  DB 80, 56, $2A, %00000000
+sprite1_player_l1::  DB 80, 48, $28, %00000000
+sprite2_player_l1::  DB 80, 56, $2A, %00000000
 
 ; ###############################################################################
 ;; LVL2
@@ -212,8 +212,8 @@ sprite2_player_l1:  DB 80, 56, $2A, %00000000
 
 
 ;;             			y  x  tile  	Att
-sprite1_player_l2:  DB 64, 56, $28, %00000000
-sprite2_player_l2:  DB 64, 64, $2A, %00000000
+sprite1_player_l2::  DB 64, 56, $28, %00000000
+sprite2_player_l2::  DB 64, 64, $2A, %00000000
 
 
 ; ###############################################################################
@@ -222,8 +222,8 @@ sprite2_player_l2:  DB 64, 64, $2A, %00000000
 
 
 ;;                      y  x  tile      Att
-sprite1_player_l3:  DB 80, 24, $28, %00000000
-sprite2_player_l3:  DB 80, 32, $2A, %00000000
+sprite1_player_l3::  DB 80, 24, $28, %00000000
+sprite2_player_l3::  DB 80, 32, $2A, %00000000
 
 ; ###############################################################################
 ;; LVL4
@@ -231,8 +231,8 @@ sprite2_player_l3:  DB 80, 32, $2A, %00000000
 
 
 ;;                      y  x  tile      Att
-sprite1_player_l4:  DB 48, 24, $28, %00000000
-sprite2_player_l4:  DB 48, 32, $2A, %00000000
+sprite1_player_l4::  DB 48, 24, $28, %00000000
+sprite2_player_l4::  DB 48, 32, $2A, %00000000
 
 
 ; ###############################################################################
@@ -241,13 +241,13 @@ sprite2_player_l4:  DB 48, 32, $2A, %00000000
 
 
 ;;                      y  x  tile      Att
-sprite1_player_l5:  DB 80, 24, $28, %00000000
-sprite2_player_l5:  DB 80, 32, $2A, %00000000
+sprite1_player_l5::  DB 80, 24, $28, %00000000
+sprite2_player_l5::  DB 80, 32, $2A, %00000000
 
-sprite1_enemy1_l5:  DB  48, 56, $20, %00000000   
-sprite2_enemy1_l5:  DB  48, 64, $22, %00000000
+sprite1_enemy1_l5::  DB  48, 56, $20, %00000000   
+sprite2_enemy1_l5::  DB  48, 64, $22, %00000000
 
-enemy1_5_stats:
+enemy1_5_stats::
 DB 48, 56, 80, DIR_DOWN
 
 ; ###############################################################################
@@ -256,19 +256,19 @@ DB 48, 56, 80, DIR_DOWN
 
 
 ;;                      y  x  tile      Att
-sprite1_player_l6:  DB 128, 136, $28, %00000000
-sprite2_player_l6:  DB 128, 144, $2A, %00000000
+sprite1_player_l6::  DB 128, 136, $28, %00000000
+sprite2_player_l6::  DB 128, 144, $2A, %00000000
 
-sprite1_enemy1_l6:  DB  128, 120, $20, %00000000   
-sprite2_enemy1_l6:  DB  128, 128, $22, %00000000
+sprite1_enemy1_l6::  DB  128, 120, $20, %00000000   
+sprite2_enemy1_l6::  DB  128, 128, $22, %00000000
 
-enemy1_6_stats:
+enemy1_6_stats::
 DB 128, 120, 80, DIR_UP
 
-sprite1_enemy2_l6:  DB  96, 104, $20, %00000000   
-sprite2_enemy2_l6:  DB  96, 112, $22, %00000000
+sprite1_enemy2_l6::  DB  96, 104, $20, %00000000   
+sprite2_enemy2_l6::  DB  96, 112, $22, %00000000
 
-enemy2_6_stats:
+enemy2_6_stats::
 DB 96, 104, 88, DIR_UP
 
 ; ###############################################################################
@@ -277,26 +277,26 @@ DB 96, 104, 88, DIR_UP
 
 
 ;;                      y  x  tile      Att
-sprite1_player_l7:  DB 64, 152, $28, %00000000
-sprite2_player_l7:  DB 64, 160, $2A, %00000000
+sprite1_player_l7::  DB 64, 152, $28, %00000000
+sprite2_player_l7::  DB 64, 160, $2A, %00000000
 
 
-sprite1_enemy1_l7:  DB  64, 136, $50, %00000000   
-sprite2_enemy1_l7:  DB  64, 144, $52, %00000000
+sprite1_enemy1_l7::  DB  64, 136, $50, %00000000   
+sprite2_enemy1_l7::  DB  64, 144, $52, %00000000
 
-enemy1_7_stats:
+enemy1_7_stats::
 DB 64, 136, 80, DIR_UP
 
-sprite1_enemy2_l7:  DB  112, 40, $54, %00000000   
-sprite2_enemy2_l7:  DB  112, 48, $56, %00000000
+sprite1_enemy2_l7::  DB  112, 40, $54, %00000000   
+sprite2_enemy2_l7::  DB  112, 48, $56, %00000000
 
-enemy2_7_stats:
+enemy2_7_stats::
 DB 112, 40, 88, DIR_RIGHT
 
-sprite1_enemy3_l7:  DB  64, 24, $54, %00000000   
-sprite2_enemy3_l7:  DB  64, 32, $56, %00000000
+sprite1_enemy3_l7::  DB  64, 24, $54, %00000000   
+sprite2_enemy3_l7::  DB  64, 32, $56, %00000000
 
-enemy3_7_stats:
+enemy3_7_stats::
 DB 64, 24, 96, DIR_RIGHT
 
 ;sprite1_enemy4_l7:  DB  16, 72, $20, %00000000   

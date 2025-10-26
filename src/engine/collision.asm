@@ -9,7 +9,7 @@ include "src/engine/enemies/enemy1_data.inc"
 SECTION "Collisions_logic", ROMX
 
 ;;Convierte la posicion del sprite a posicion de tile map y la guarda en hl
-get_tilemap_pos_player:
+get_tilemap_pos_player::
 
    ld a, [player_data + PLAYER_Y]
    call convert_y_to_ty
@@ -20,7 +20,7 @@ get_tilemap_pos_player:
 
 ret
 
-get_tilemap_pos_enemy:
+get_tilemap_pos_enemy::
 
    ld a, [enemy_data + ENEMY_Y]
    call convert_y_to_ty

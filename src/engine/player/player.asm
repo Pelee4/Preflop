@@ -29,7 +29,7 @@ EXPORT player_data
 SECTION "Player functions", ROM0
 
 
-   start_move_right:
+   start_move_right::
       PLAY_SFX SFX_MOVE
       call move_entities
       call get_tilemap_pos_player ;now hl = player_pos 
@@ -38,7 +38,7 @@ SECTION "Player functions", ROM0
       call can_move
       ret
 
-   start_move_left:
+   start_move_left::
       PLAY_SFX SFX_MOVE
       call move_entities
       call get_tilemap_pos_player
@@ -47,7 +47,7 @@ SECTION "Player functions", ROM0
       call can_move
       ret
 
-   start_move_up:
+   start_move_up::
       PLAY_SFX SFX_MOVE
       call move_entities
       call get_tilemap_pos_player
@@ -56,7 +56,7 @@ SECTION "Player functions", ROM0
       call can_move
       ret
 
-   start_move_down:
+   start_move_down::
       PLAY_SFX SFX_MOVE
       call move_entities
       call get_tilemap_pos_player
@@ -65,7 +65,7 @@ SECTION "Player functions", ROM0
       call can_move
       ret
 
-   moving:
+   moving::
       call update_move
 ret
 
@@ -164,7 +164,7 @@ update_sprite::
 ret
 
 ;;To flip sprite to right
-Flip_sprite_right:
+Flip_sprite_right::
    ld hl, TILE_LEFT_SPRITE
    ld a, [hl]
    cp $2C
@@ -176,7 +176,7 @@ Flip_sprite_right:
 ret
 
 ;;To flip sprite to left
-Flip_sprite_left:
+Flip_sprite_left::
    ld hl, TILE_LEFT_SPRITE
    ld a, [hl]
    cp $28
@@ -188,7 +188,7 @@ Flip_sprite_left:
 ret
 
 ;;To flip sprite to left
-Flip_sprite_down:
+Flip_sprite_down::
    ld hl, TILE_LEFT_SPRITE
    ld a, [hl]
    cp $30
@@ -200,7 +200,7 @@ Flip_sprite_down:
 ret
 
 ;;To flip sprite to left
-Flip_sprite_up:
+Flip_sprite_up::
    ld hl, TILE_LEFT_SPRITE
    ld a, [hl]
    cp $34

@@ -11,9 +11,9 @@ sc_game_start::
 .loop
     call UpdateSineOffset
     call read_a
-    ;call hUGE_dosound  ;maybe no funciona por reescritura de hl despues del call init
+    ei
     cp $FF
-    jr nz, .loop
+    jr nz, .music_loop
 
     ;; --------------------------------------------------------
     ;; Botón A pulsado → detener efecto antes de salir
@@ -23,8 +23,14 @@ sc_game_start::
     ld [wSineActive], a         ; marcar efecto como inactivo
     call StopWaveEffect         ; limpiar STAT/IE y restaurar SCX
     ei                          ; reactivar interrupciones si se requiere
+    ;call wait_vblank_start
+    ;call hUGE_dosound
 ret
 
+.music_loop:
+    ;call wait_vblank_start
+    ;call hUGE_dosound
+    jr .loop
 
 sc_game_start_init::
     call lcd_off

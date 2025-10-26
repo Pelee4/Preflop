@@ -14,6 +14,7 @@ sc_game_lvl1::
     call sc_game_lvl1_init
     loop_lvl1:
         call wait_vblank_start   ; <<-- sincroniza AL INICIO de frame
+        call wait_vblank_start
         call read_input
         call read_input_buttons
         call check_collision

@@ -3,7 +3,7 @@ include "includes/constants.inc"
 include "includes/macros.inc"
 
 
-SECTION "Sound Manager", ROM0
+SECTION "Sound Manager", ROMX
 
 ;------------------------------------------------------------------------------
 ; Inicializa el chip de sonido
