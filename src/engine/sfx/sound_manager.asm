@@ -2,7 +2,6 @@
 include "includes/constants.inc"
 include "includes/macros.inc"
 
-
 SECTION "Sound Manager", ROMX
 
 ;------------------------------------------------------------------------------
@@ -63,4 +62,39 @@ play_click::
     ld a, %11101001         ; bits altos = 111 (n=2047), bit7=1 para trigger
     ld [SFX_CH2_FREQ_HI], a
 
+    ret
+
+
+
+StopMusic::
+    ; Deja de llamar a hUGE_dosound en el bucle principal
+    ; y limpia todos los canales de sonido
+
+    xor a
+    ld [rNR10], a    ; CH1 sweep off
+    ld [rNR11], a
+    ld [rNR12], a
+    ld [rNR13], a
+    ld [rNR14], a
+
+    ld [rNR21], a    ; CH2 off
+    ld [rNR22], a
+    ld [rNR23], a
+    ld [rNR24], a
+
+    ld [rNR30], a    ; CH3 off
+    ld [rNR31], a
+    ld [rNR32], a
+    ld [rNR33], a
+    ld [rNR34], a
+
+    ld [rNR41], a    ; Noise off
+    ld [rNR42], a
+    ld [rNR43], a
+    ld [rNR44], a
+
+    ; Master off
+    ld [rNR50], a
+    ld [rNR51], a
+    ld [rNR52], a
     ret

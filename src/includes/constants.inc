@@ -115,3 +115,95 @@ DEF MENU_THEME EQU 10
 DEF LEVELS_THEME EQU 11
 DEF DEAD_THEME EQU 12
 DEF GAME_COMPLETED EQU 20
+
+
+; =======================================
+; SOUND REGISTERS (APU)
+; =======================================
+
+; --- Channel 1 (Square + Sweep) ---
+DEF rNR10 EQU $FF10  ; Sweep register
+DEF rNR11 EQU $FF11  ; Sound length / Duty
+DEF rNR12 EQU $FF12  ; Volume envelope
+DEF rNR13 EQU $FF13  ; Frequency low
+DEF rNR14 EQU $FF14  ; Frequency high + control
+
+; --- Channel 2 (Square) ---
+DEF rNR21 EQU $FF16  ; Sound length / Duty
+DEF rNR22 EQU $FF17  ; Volume envelope
+DEF rNR23 EQU $FF18  ; Frequency low
+DEF rNR24 EQU $FF19  ; Frequency high + control
+
+; --- Channel 3 (Wave) ---
+DEF rNR30 EQU $FF1A  ; Sound on/off
+DEF rNR31 EQU $FF1B  ; Sound length
+DEF rNR32 EQU $FF1C  ; Output level
+DEF rNR33 EQU $FF1D  ; Frequency low
+DEF rNR34 EQU $FF1E  ; Frequency high + control
+
+; --- Channel 4 (Noise) ---
+DEF rNR41 EQU $FF20  ; Sound length
+DEF rNR42 EQU $FF21  ; Volume envelope
+DEF rNR43 EQU $FF22  ; Polynomial counter (frequency / randomness)
+DEF rNR44 EQU $FF23  ; Counter / consecutive; control
+
+; --- Control registers ---
+DEF rNR50 EQU $FF24  ; Master volume (Vin L/R enable)
+DEF rNR51 EQU $FF25  ; Sound panning (L/R output enable)
+DEF rNR52 EQU $FF26  ; Sound on/off (master enable)
+
+; --- Wave pattern RAM (for channel 3) ---
+DEF rWAVE0 EQU $FF30
+DEF rWAVE1 EQU $FF31
+DEF rWAVE2 EQU $FF32
+DEF rWAVE3 EQU $FF33
+DEF rWAVE4 EQU $FF34
+DEF rWAVE5 EQU $FF35
+DEF rWAVE6 EQU $FF36
+DEF rWAVE7 EQU $FF37
+DEF rWAVE8 EQU $FF38
+DEF rWAVE9 EQU $FF39
+DEF rWAVEA EQU $FF3A
+DEF rWAVEB EQU $FF3B
+DEF rWAVEC EQU $FF3C
+DEF rWAVED EQU $FF3D
+DEF rWAVEE EQU $FF3E
+DEF rWAVEF EQU $FF3F
+
+
+
+
+
+
+;; ===============================
+;; REGISTROS DE HARDWARE
+;; ===============================
+
+; Registros de LCD/Video
+DEF rSTAT    EQU $FF41   ; LCD Status
+DEF rSCY     EQU $FF42   ; Scroll Y
+DEF rSCX     EQU $FF43   ; Scroll X
+DEF rLYC     EQU $FF45   ; LY Compare
+DEF rOBP0    EQU $FF48   ; Object Palette 0 Data
+DEF rOBP1    EQU $FF49   ; Object Palette 1 Data
+DEF rWY      EQU $FF4A   ; Window Y Position
+DEF rWX      EQU $FF4B   ; Window X Position
+
+; Registros de Interrupciones
+DEF rIE      EQU $FFFF   ; Interrupt Enable
+DEF rIF      EQU $FF0F   ; Interrupt Flag
+
+; Bits de Interrupt Enable (rIE) y Interrupt Flag (rIF)
+DEF IEF_VBLANK  EQU %00000001   ; Bit 0: VBlank
+DEF IEF_STAT    EQU %00000010   ; Bit 1: LCD STAT
+DEF IEF_TIMER   EQU %00000100   ; Bit 2: Timer
+DEF IEF_SERIAL  EQU %00001000   ; Bit 3: Serial
+DEF IEF_JOYPAD  EQU %00010000   ; Bit 4: Joypad
+
+; Bits de LCD STAT (rSTAT)
+DEF STATF_LYC     EQU %01000000 ; Bit 6: LYC=LY Interrupt
+DEF STATF_MODE10  EQU %00100000 ; Bit 5: Mode 2 OAM Interrupt
+DEF STATF_MODE01  EQU %00010000 ; Bit 4: Mode 1 VBlank Interrupt
+DEF STATF_MODE00  EQU %00001000 ; Bit 3: Mode 0 HBlank Interrupt
+DEF STATF_LYCF    EQU %00000100 ; Bit 2: LYC=LY Flag (Read-only)
+DEF STATF_BUSY    EQU %00000010 ; Bit 1: PPU Mode (Read-only)
