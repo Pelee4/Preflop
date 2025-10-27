@@ -1,8 +1,11 @@
-
 SECTION "Entry point", ROM0[$150]
 
 main::
    call init_sound
+   ;ld hl, dead_theme
+   ;call hUGE_init
+   ;ld hl, info_screen_theme
+   ;call hUGE_init
    ld hl, menu_theme
    call hUGE_init
    call sc_game_start
