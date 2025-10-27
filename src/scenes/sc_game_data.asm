@@ -299,6 +299,35 @@ sprite2_enemy3_l7::  DB  64, 32, $56, %00000000
 enemy3_7_stats::
 DB 64, 24, 96, DIR_RIGHT
 
+; ###############################################################################
+;; LVL8
+; ###############################################################################
+
+
+;;                      y  x  tile      Att
+sprite1_player_l8::  DB 32, 152, $28, %00000000
+sprite2_player_l8::  DB 32, 160, $2A, %00000000
+
+
+sprite1_enemy1_l8::  DB  144, 104, $50, %00000000   
+sprite2_enemy1_l8::  DB  144, 112, $52, %00000000
+
+enemy1_8_stats::
+DB 144, 104, 80, DIR_UP
+
+sprite1_enemy2_l8::  DB  96, 40, $54, %00000000   
+sprite2_enemy2_l8::  DB  96, 48, $56, %00000000
+
+enemy2_8_stats::
+DB 96, 40, 88, DIR_RIGHT
+
+sprite1_enemy3_l8::  DB  16, 24, $54, %00000000   
+sprite2_enemy3_l8::  DB  16, 32, $56, %00000000
+
+enemy3_8_stats::
+DB 16, 24, 96, DIR_RIGHT
+
+
 ;sprite1_enemy4_l7:  DB  16, 72, $20, %00000000   
 ;sprite2_enemy4_l7:  DB  16, 80, $22, %00000000
 

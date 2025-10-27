@@ -40,6 +40,10 @@ enemy_moves_once::
         
         cp $10 ;;Checkea si hay roca
         jr z, change_dir_rl
+
+        cp $00 ;;Checkea si hay escalera
+        jr z, change_dir_rl
+
         call move_right_enemy
         ret
         change_dir_rl:
@@ -56,6 +60,10 @@ enemy_moves_once::
         
         cp $10 ;;Checkea si hay roca
         jr z, change_dir_lr
+
+        cp $00 ;;Checkea si hay escalera
+        jr z, change_dir_lr
+
         call move_left_enemy
         ret
         change_dir_lr:
@@ -78,6 +86,9 @@ enemy_moves_once::
         cp $10 ;;Checkea si hay roca
         jr z, change_dir_ud
         
+        cp $00 ;;Checkea si hay escalera
+        jr z, change_dir_ud
+
         call move_up_enemy
         ret
         change_dir_ud:
@@ -93,6 +104,9 @@ enemy_moves_once::
         jr z, change_dir_du
         
         cp $10 ;;Checkea si hay roca
+        jr z, change_dir_du
+
+        cp $00 ;;Checkea si hay escalera
         jr z, change_dir_du
         call move_down_enemy
         ret
