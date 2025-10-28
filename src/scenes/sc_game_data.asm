@@ -259,14 +259,14 @@ DB 48, 56, 80, DIR_DOWN
 sprite1_player_l6::  DB 128, 136, $28, %00000000
 sprite2_player_l6::  DB 128, 144, $2A, %00000000
 
-sprite1_enemy1_l6::  DB  128, 120, $20, %00000000   
-sprite2_enemy1_l6::  DB  128, 128, $22, %00000000
+sprite1_enemy1_l6::  DB  128, 120, $50, %00000000   
+sprite2_enemy1_l6::  DB  128, 128, $52, %00000000
 
 enemy1_6_stats::
 DB 128, 120, 80, DIR_UP
 
-sprite1_enemy2_l6::  DB  96, 104, $20, %00000000   
-sprite2_enemy2_l6::  DB  96, 112, $22, %00000000
+sprite1_enemy2_l6::  DB  96, 104, $50, %00000000   
+sprite2_enemy2_l6::  DB  96, 112, $52, %00000000
 
 enemy2_6_stats::
 DB 96, 104, 88, DIR_UP

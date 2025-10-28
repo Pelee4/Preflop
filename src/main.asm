@@ -9,7 +9,7 @@ main::
    ld hl, menu_theme
    call hUGE_init
    call sc_game_start
-   call sc_game_lvl8
+   call sc_game_lvl1
    di
    halt
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

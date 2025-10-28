@@ -50,12 +50,8 @@ sc_game_lvl1_init::
    ;;INITIALIZE PLAYER_DATA ON 0
    ld a, 80
    ld [player_data + PLAYER_Y], a
-   ;ld a, 80
-   ;ld [player_data + PLAYER_PREVIOUS_Y], a
    ld a, 48
    ld [player_data + PLAYER_X], a
-   ;ld a, 48
-   ;ld [player_data + PLAYER_PREVIOUS_X], a
    ld a, 0
    ld [player_data + PLAYER_ISMOVING], a
    ld a, 1

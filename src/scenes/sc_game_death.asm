@@ -10,7 +10,6 @@ sc_game_death::
     call sc_game_death_init
 
     call wait_vblank_start
-    call wait_vblank_start
 
 .loop
     call read_a_death

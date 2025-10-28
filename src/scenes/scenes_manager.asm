@@ -22,6 +22,8 @@ ret
 
 change_level_manager::
     call get_player_level
+    cp 1
+    jr z, open_lvl1
     cp 2
     jr z, open_lvl2
     cp 3
@@ -39,7 +41,8 @@ change_level_manager::
 ret
 
 
-
+open_lvl1:
+    call sc_game_lvl1
 
 open_lvl2:
     call sc_game_lvl2
