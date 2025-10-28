@@ -36,6 +36,8 @@ change_level_manager::
     jr z, open_lvl7
     cp 8
     jr z, open_lvl8
+    cp 9
+    jr z, init_game_screen
 ret
 
 
@@ -59,3 +61,6 @@ open_lvl7:
 
 open_lvl8:
     call sc_game_lvl8
+
+init_game_screen:
+    call sc_game_start
