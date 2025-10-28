@@ -170,8 +170,10 @@ DEF rWAVED EQU $FF3D
 DEF rWAVEE EQU $FF3E
 DEF rWAVEF EQU $FF3F
 
+;BANK DIR
+DEF rROMB0 EQU $2000
 
-
+;DEF MAIN_BANK  EQU BANK(main)   ; o BANK(main) o cualquier label que esté en tu banco de juego
 
 
 

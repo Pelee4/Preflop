@@ -4,20 +4,48 @@
 include "includes/constants.inc"
 include "includes/macros.inc"
 
-SECTION "Death scene", ROMX
+SECTION "Death scene", ROM0
 
 sc_game_death::
+    ;; MUSIC INIT
+    di
+    call StopMusic
+    call init_sound  ;puede que de problemas al ya estar iniciado, o que me toque quitar apagar antes
+    ;SwitchBank dead_theme
+    ld hl, dead_theme
+    call hUGE_init
+    ;SwitchBank menu_theme
+    ; ld a, BANK(main)
+    ; ld [rROMB0], a
+    ei
+
+
     call sc_game_death_init
 
     call wait_vblank_start
 
 .loop
+    call wait_vblank_start
+    ;ld a, BANK(dead_theme)
+    ;ld [rROMB0], a
+    di
+    ;SwitchBank dead_theme
+    call hUGE_dosound
+    ; ld a, BANK(main)
+    ; ld [rROMB0], a
+    ei
     call read_a_death
     cp $FF
     jr nz, .loop
 
     
     call change_level_manager
+    di
+    call StopMusic
+    xor a 
+    ld [$FF41], a            ; rSTAT = 0 (desactiva HBlank)
+    ld [$FFFF], a            ; rIE = 0 (desactiva TODO)
+    ei
     
     
 
