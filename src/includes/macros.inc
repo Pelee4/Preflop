@@ -31,3 +31,12 @@ MACRO PLAY_SFX
     ld a, \1
     call play_sound
 ENDM
+
+
+;---------------------------------------------
+; Cambiar banco de ROM
+;---------------------------------------------
+MACRO SwitchBank
+    ld a, BANK(\1)
+    ld [rROMB0], a
+ENDM
