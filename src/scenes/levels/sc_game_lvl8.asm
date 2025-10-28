@@ -8,7 +8,7 @@ include "src/engine/enemies/enemy1_data.inc"
 
 
 
-SECTION "Lvl8 scene", ROMX
+SECTION "Lvl8 scene", ROM0
 
 sc_game_lvl8::
     call sc_game_lvl8_init

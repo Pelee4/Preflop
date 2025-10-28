@@ -13,7 +13,7 @@ include "src/engine/player/player_data.inc"
 
 
 
-SECTION "Level_manager_stuff", ROMX
+SECTION "Level_manager_stuff", ROM0
 
 get_player_level:
     ld a, [player_data + PLAYER_LEVEL]
@@ -29,8 +29,6 @@ change_level_manager::
     cp 3
     jr z, open_lvl3  
     cp 4 
-    jr z, open_lvl4
-    cp 5
     jr z, open_lvl5
     cp 6
     jr z, open_lvl6
@@ -49,9 +47,6 @@ open_lvl2:
 
 open_lvl3:
     call sc_game_lvl3
-
-open_lvl4:
-    call sc_game_lvl4
 
 open_lvl5:
     call sc_game_lvl5

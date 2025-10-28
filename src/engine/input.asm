@@ -12,7 +12,7 @@ estadoBotones:    ds 1     ; Último estado de los botones (A, B, Start, Select)
 flancoBotones:    ds 1     ; Flancos ascendentes de los botones
 
 
-SECTION "Inputs", ROMX
+SECTION "Inputs", ROM0
 
 read_input::
     ld a, [player_data + PLAYER_ISMOVING]
@@ -87,4 +87,33 @@ read_input_buttons::
     ret z                 ; si no está pulsado, salir
     call Interact
 
+ret
+
+read_a_menus::
+    ; Leer botones igual que en el juego
+    ld a, SELECT_BUTTONS
+    ld [rJOYP], a
+    ld a, [rJOYP]
+    ld a, [rJOYP]
+    ld a, [rJOYP]
+
+    cpl
+    and $0F
+    ld b, a                ; estado actual botones
+
+    ; --- calcular flanco ascendente ---
+    ldh a, [estadoBotones]
+    xor b
+    and b
+    ldh [flancoBotones], a
+    ld a, b
+    ldh [estadoBotones], a
+    ; -------------------------------
+
+    ldh a, [flancoBotones]
+
+    bit A_PRESSED, a       ; ¿A acaba de ser pulsado?
+    ret z                  ; si no, salir
+
+    ld a, $FF              ; acción cuando se pulsa A
 ret

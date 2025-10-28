@@ -1,6 +1,6 @@
 INCLUDE "includes/constants.inc"
 
-SECTION "Utils", ROMX
+SECTION "Utils", ROM0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LCD OFF (turns off the screen)
