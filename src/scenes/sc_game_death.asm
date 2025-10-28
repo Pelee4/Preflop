@@ -39,13 +39,13 @@ sc_game_death::
     jr nz, .loop
 
     
-    call change_level_manager
-    di
     call StopMusic
     xor a 
     ld [$FF41], a            ; rSTAT = 0 (desactiva HBlank)
     ld [$FFFF], a            ; rIE = 0 (desactiva TODO)
-    ei
+    call StopMusic
+    call init_sound
+    call change_level_manager
     
     
 

@@ -27,6 +27,7 @@ sc_game_start::
     xor a 
     ld [$FF41], a            ; rSTAT = 0 (desactiva HBlank)
     ld [$FFFF], a            ; rIE = 0 (desactiva TODO)
+    call init_sound
 ret
 
 sc_game_start_init::
