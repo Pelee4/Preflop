@@ -12,8 +12,6 @@ sc_game_death::
     call StopMusic
     call init_sound  ;puede que de problemas al ya estar iniciado, o que me toque quitar apagar antes
     ;SwitchBank dead_theme
-    ld hl, dead_theme
-    call hUGE_init
     ;SwitchBank menu_theme
     ; ld a, BANK(main)
     ; ld [rROMB0], a
@@ -30,11 +28,10 @@ sc_game_death::
     ;ld [rROMB0], a
     di
     ;SwitchBank dead_theme
-    call hUGE_dosound
     ; ld a, BANK(main)
     ; ld [rROMB0], a
     ei
-    call read_a_death
+    call read_a_menus
     cp $FF
     jr nz, .loop
 
@@ -94,21 +91,4 @@ sc_game_death_init::
     
     ei
 
-ret
-
-
-;; ------------------------------------------------------------
-;; ENTRADA BOTÓN A 
-;; ------------------------------------------------------------
-read_a_death::
-    ld a, SELECT_BUTTONS
-    ld [rJOYP], a
-    ld a, [rJOYP]
-    ld a, [rJOYP]
-    ld a, [rJOYP]
-
-    bit A_PRESSED, a
-    ret nz
-
-    ld a, $FF
 ret

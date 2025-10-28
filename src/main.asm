@@ -6,8 +6,6 @@ main::
    ;call hUGE_init
    ;ld hl, info_screen_theme
    ;call hUGE_init
-   ld hl, menu_theme
-   call hUGE_init
    call sc_game_start
    call sc_game_lvl3
    di

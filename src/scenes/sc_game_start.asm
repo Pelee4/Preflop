@@ -4,14 +4,14 @@
 include "includes/constants.inc"
 include "includes/macros.inc"
 
-SECTION "Menu scene", ROMX
+SECTION "Menu scene", ROM0
 
 sc_game_start::
     call sc_game_start_init
 .loop
     halt                        ; Espera a cualquier interrupción (eficiente)
     call UpdateSineOffset
-    call read_a
+    call read_a_menus
     cp $FF
     jr nz, .loop
 
@@ -81,8 +81,7 @@ VBlankHandler::
     push bc
     push de
     push hl
-    
-    call hUGE_dosound        ; Actualizar música cada VBlank
+    ; Actualizar música cada VBlank
     
     pop hl
     pop de
@@ -234,7 +233,7 @@ StopWaveEffect::
 ;; ------------------------------------------------------------
 ;; TABLA DE SENO
 ;; ------------------------------------------------------------
-SECTION "Sine table", ROMX
+SECTION "Sine table", ROM0
 SineTable:
     db 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
     db 16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1
@@ -244,24 +243,6 @@ SineTable:
     db 16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1
     db 0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15
     db -16,-15,-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1
-
-
-;; ------------------------------------------------------------
-;; ENTRADA BOTÓN A
-;; ------------------------------------------------------------
-read_a::
-    ld a, SELECT_BUTTONS
-    ld [rJOYP], a
-    ld a, [rJOYP]
-    ld a, [rJOYP]
-    ld a, [rJOYP]
-
-    bit A_PRESSED, a
-    ret nz
-
-    ld a, $FF
-ret
-
 
 
 ;; ------------------------------------------------------------
