@@ -7,6 +7,13 @@ MACRO MEMSET
    call memset_256
 ENDM
 
+MACRO MEMSET_2
+   ld hl, \1
+   ld a, \2
+   ld bc, \3
+   call memset
+ENDM
+
 MACRO MEMCPY
    ld hl, \1
    ld de, \2

@@ -160,6 +160,7 @@ SECTION "Initialize tiles", ROM0
 ; ###############################################################################
 
 Tiles_Init::
+
 	MEMCPY_2 TileEnvironment, VRAM_TILE_START, 27*16 ;27 tiles (8x8) = 7 tiles 16x16
 
 	;DRAW PLAYER AND ENEMIES
@@ -185,7 +186,7 @@ Tiles_Init::
     ;DRAW HUD TILES
     MEMCPY Hud, $87C0, $60
      
-
+    MEMSET_2 $9800, $10, 1024
 ret
 
 

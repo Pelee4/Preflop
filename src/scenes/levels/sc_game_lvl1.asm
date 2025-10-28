@@ -68,7 +68,8 @@ sc_game_lvl1_init::
    MEMCPY sprite1_player_l1, $FE00, SPRITE_BYTE_SIZE
    MEMCPY sprite2_player_l1, $FE00 + SPRITE_BYTE_SIZE, SPRITE_BYTE_SIZE
 
- 
+    MEMCPY_2 $10, $9800, 576
+
     ;MAP DRAW
     MEMCPY_2 map1, $9800, 576
 

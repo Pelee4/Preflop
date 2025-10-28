@@ -72,8 +72,8 @@ DB $04,$99,$00,$20,$40,$03,$00,$00
 DB $01,$04,$00,$01,$00,$01,$08,$01
 DB $00,$00,$00,$00,$01,$00,$01,$00
 DB $00,$01,$00,$01,$01,$00,$00,$01
-DB $FF,$FF,$EF,$FF,$E7,$FF,$FF,$FF
-DB $BF,$FF,$DD,$FF,$FB,$FF,$FF,$FF
+DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
+DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF

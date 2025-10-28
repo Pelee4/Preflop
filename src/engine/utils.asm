@@ -84,3 +84,13 @@ memset_256::
     dec b
     jr nz, memset_256
 ret
+
+memset::
+    ld [hl+], a
+    dec bc
+    ld e, a
+    ld a, b
+    or c
+    ld a, e
+    jr nz, memset
+ret
