@@ -21,6 +21,7 @@ ret
 
 
 change_level_manager::
+    PLAY_SFX 4
     call get_player_level
     cp 1
     jr z, open_lvl1
