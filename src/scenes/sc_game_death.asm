@@ -9,7 +9,6 @@ SECTION "Death scene", ROM0
 
 sc_game_death::
 call init_sound
-    PLAY_SFX 3
     call sc_game_death_init
 
     call wait_vblank_start

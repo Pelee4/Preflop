@@ -108,6 +108,7 @@ check_empty_tile::
     ld b, 180              ; 3 segundos
 .wait_anim:
     call wait_vblank_start
+    PLAY_SFX 3
     ld hl, $FE03       
     
     ld a, b
