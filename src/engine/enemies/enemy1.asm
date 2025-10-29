@@ -1,5 +1,6 @@
 include "src/engine/enemies/enemy1_data.inc"
 include "includes/constants.inc"
+include "includes/macros.inc"
 
 
 SECTION "Enemy vars", WRAM0
@@ -145,6 +146,28 @@ checks_hitting_player::
     ret
 ;if its the same -> call take_damage
     die:
+    ; ANIMACIÓN DE MUERTE
+    ld b, 180              ; 3 segundos
+    .wait_anim:
+        call wait_vblank_start
+        ld a, b
+        and %00001000         
+        jr z, .restore_pal
+        
+        ;; Usar paleta 1 (blanca)
+        ld a, %00010000       
+        ld [$FE03], a         
+        ld [$FE07], a         
+        jr .dec
+    .restore_pal:
+        ;; Usar paleta 0 (normal)
+        ld a, %00000000       
+        ld [$FE03], a         
+        ld [$FE07], a          
+    .dec:
+        dec b
+        jr nz, .wait_anim
+        
         jp sc_game_death
 ret
 

@@ -36,8 +36,11 @@ sc_game_lvl1_init::
    ld hl, rBGP
    ld [hl], %11100100
 
-   ld hl, rOBJP
-   ld [hl], %11100100
+    ;; CONFIGURAR AMBAS PALETAS DE SPRITES
+    ld a, %11100100
+    ld [rOBP0], a        ; Paleta 0 normal (FF48) - para todos
+    ld a, %11111111
+    ld [rOBP1], a        ; Paleta 1 blanca (FF49) - para parpadeo
 
    ;;ACTIVATE SPRITES AND MAKE THEM 8x16
    ld hl, rLCDC

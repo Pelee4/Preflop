@@ -3,6 +3,7 @@
 ;; ------------------------------------------------------------
 include "includes/constants.inc"
 include "includes/macros.inc"
+include "src/engine/player/player_data.inc"
 
 SECTION "Death scene", ROM0
 
@@ -42,8 +43,29 @@ sc_game_death::
     ld [$FFFF], a            ; rIE = 0 (desactiva TODO)
     call StopMusic
     call init_sound
-    call change_level_manager
+
+    ;;HE CAMBIADO A QUE SEA ASI PORQUE SI NO SE ROMPE EL JUEGO
+    call reload_current_level
     
+    reload_current_level:
+    ld a, [player_data + PLAYER_LEVEL]
+    
+    cp 1
+    jp z, sc_game_lvl1
+    cp 2
+    jp z, sc_game_lvl2
+    cp 3
+    jp z, sc_game_lvl3
+    cp 5
+    jp z, sc_game_lvl5
+    cp 6
+    jp z, sc_game_lvl6
+    cp 7
+    jp z, sc_game_lvl7
+    cp 8
+    jp z, sc_game_lvl8
+    
+    ret  ; Por si acaso
     
 
 sc_game_death_init::

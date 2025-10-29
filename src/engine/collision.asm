@@ -101,11 +101,42 @@ ret
 
 ;;comprobar si te estas tocando (jeje) con el vacío
 check_empty_tile::
-   ld a, [hl]
-   cp $18
-   ret nz
-   ;;AQUI VA LA MUERTE, de momento he puesto reset del lvl 1S
-   jp sc_game_death
+    ld a,[hl]
+    cp $18
+    ret nz
+    
+    ld b, 180              ; 3 segundos
+.wait_anim:
+    call wait_vblank_start
+    ld hl, $FE03       
+    
+    ld a, b
+    and %00001000      
+    jr z, .use_palette0
+    
+    ;; Usar paleta 1 (blanca)
+    ld a, %00010000    
+    ld [hl], a
+    ld a, l
+    add 4
+    ld l, a
+    ld a, %00010000
+    ld [hl], a         
+    jr .dec  
+.use_palette0:
+    ;; Usar paleta 0 (normal)
+    ld a, %00000000    
+    ld [hl], a
+    ld a, l
+    add 4
+    ld l, a
+    ld a, %00000000
+    ld [hl], a         
+.dec:
+    dec b
+    jr nz, .wait_anim
+    
+    jp sc_game_death
 ret
 
 
