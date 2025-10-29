@@ -8,17 +8,8 @@ include "src/engine/player/player_data.inc"
 SECTION "Death scene", ROM0
 
 sc_game_death::
-    ;; MUSIC INIT
-    di
-    call StopMusic
-    call init_sound  ;puede que de problemas al ya estar iniciado, o que me toque quitar apagar antes
-    ;SwitchBank dead_theme
-    ;SwitchBank menu_theme
-    ; ld a, BANK(main)
-    ; ld [rROMB0], a
-    ei
-
-
+call init_sound
+    PLAY_SFX 3
     call sc_game_death_init
 
     call wait_vblank_start
@@ -37,12 +28,12 @@ sc_game_death::
     jr nz, .loop
 
     
-    call StopMusic
+    ;call StopMusic
     xor a 
     ld [$FF41], a            ; rSTAT = 0 (desactiva HBlank)
     ld [$FFFF], a            ; rIE = 0 (desactiva TODO)
-    call StopMusic
-    call init_sound
+    ;call StopMusic
+    ;call init_sound
 
     ;;HE CAMBIADO A QUE SEA ASI PORQUE SI NO SE ROMPE EL JUEGO
     call reload_current_level

@@ -1,6 +1,6 @@
 ;bit 
 include "src/engine/player/player_data.inc"
-
+include "includes/macros.inc"
 
 SECTION "Interaction", ROM0
 
@@ -136,6 +136,7 @@ ret
 
 
 put_floor:
+    PLAY_SFX 2
     ld b, h
     ld c, l
     call wait_vblank_start   
@@ -155,6 +156,7 @@ put_floor:
 ret
 
 put_empty:
+    PLAY_SFX 5
     ld b, h
     ld c, l
     call wait_vblank_start   
