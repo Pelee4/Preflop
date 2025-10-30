@@ -42,6 +42,9 @@ play_sound::
     cp 5
     jp z, play_pickup_block
 
+    cp 6
+    jp z, play_collide_wall
+
     ret
 
 
@@ -128,22 +131,25 @@ play_death::
 ; Usa canal 4 - ruido blanco (ruido corto y brillante)
 ;------------------------------------------------------------------------------
 play_move::
-    ; Length corta (igual)
-    ld a, %11100010
-    ld [rNR41], a
-    
-    ; Volumen MÁS BAJO, decay MÁS RÁPIDO
-    ld a, %00101110         ; vol=2 (era 3), decrease, step=6 (era 4)
-    ld [rNR42], a
-    
-    ; Ruido más grave y menos agresivo
-    ld a, %01010110         ; shift=5 (era 4), wide, divider=6
-    ld [rNR43], a
-    
-    ; Disparo
-    ld a, %11000100
-    ld [rNR44], a
+    ; Sweep ascendente lento
+    ld a, %00111001         ; tiempo=3, increase, shift=1
+    ld [rNR10], a
+  
+    ; Duty 50%, length media
+    ld a, %10011111         ; duty=50%, length=31
+    ld [rNR11], a
+  
+    ; Volumen alto, decay suave
+    ld a, %00110001         ; vol=15, decrease, step=1
+    ld [rNR12], a
+  
+    ; Frecuencia baja al inicio
+    ld a, $80
+    ld [rNR13], a
+    ld a, %11000010         ; trigger + use length
+    ld [rNR14], a
     ret
+
 
 
 
@@ -153,7 +159,7 @@ play_pickup_block::
     ld [rNR41], a
     
     ; Volumen MÍNIMO, decay ultra rápido
-    ld a, %00111111         ; vol=1 (muy bajo), decrease, step=7 (máximo)
+    ld a, %00110111         ; vol=1 (muy bajo), decrease, step=7 (máximo)
     ld [rNR42], a
     
     ; Ruido MUY grave (menos "tsss")
@@ -168,23 +174,21 @@ play_pickup_block::
 
 
 play_place_block::
-    ; Sweep ascendente lento
-    ld a, %00111001         ; tiempo=3, increase, shift=1
-    ld [rNR10], a
-  
-    ; Duty 50%, length media
-    ld a, %10011111         ; duty=50%, length=31
-    ld [rNR11], a
-  
-    ; Volumen alto, decay suave
-    ld a, %11110001         ; vol=15, decrease, step=1
-    ld [rNR12], a
-  
-    ; Frecuencia baja al inicio
-    ld a, $80
-    ld [rNR13], a
-    ld a, %11000010         ; trigger + use length
-    ld [rNR14], a
+    ; Length corta (igual)
+    ld a, %11100010
+    ld [rNR41], a
+    
+    ; Volumen MÁS BAJO, decay MÁS RÁPIDO
+    ld a, %00100110         ; vol=2 (era 3), decrease, step=6 (era 4)
+    ld [rNR42], a
+    
+    ; Ruido más grave y menos agresivo
+    ld a, %01010110         ; shift=5 (era 4), wide, divider=6
+    ld [rNR43], a
+    
+    ; Disparo
+    ld a, %11000100
+    ld [rNR44], a
     ret
 
 
@@ -197,9 +201,9 @@ play_collide_wall::
     ; Duty 50%, length media
     ld a, %10011111         ; duty=50%, length=31
     ld [rNR11], a
-  
+
     ; Volumen alto, decay suave
-    ld a, %11110001         ; vol=15, decrease, step=1
+    ld a, %01110001         ; vol=15, decrease, step=1
     ld [rNR12], a
   
     ; Frecuencia baja al inicio
@@ -274,6 +278,6 @@ play_completed::
 
 
 
-;play_place_block::
+;play_move::
     ; === PRIMER TONO (impacto) ==
 

@@ -44,11 +44,7 @@ check_solid::
    cp $10
    ret z
    ld a, $FF
-   ;;if its a block, returns player to previous position
-   ; ld a, [player_data + PLAYER_PREVIOUS_X]
-   ; ld [player_data + PLAYER_X], a
-   ; ld a, [player_data + PLAYER_PREVIOUS_Y]
-   ; ld [player_data + PLAYER_Y], a
+
 ret
 
 
