@@ -38,7 +38,7 @@ change_level_manager::
     cp 8
     jr z, open_lvl8
     cp 9
-    jr z, init_game_screen
+    jp main
 ret
 
 

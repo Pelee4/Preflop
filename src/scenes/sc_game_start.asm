@@ -43,6 +43,8 @@ sc_game_start_init::
     MEMSET $9924, 0, 13
 
     ;; Copiar tileset y mapa
+    MEMSET_2 $8000, 0, 2032
+    MEMSET $FE00, 0, 160
     MEMCPY_2 PantallaInicio, $8000, 2000
     MEMCPY_2 PantallaInicioMap, $9800, 576
 
